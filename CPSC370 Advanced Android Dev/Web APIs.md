@@ -55,3 +55,13 @@ BaseURL + **Query String**
 2. Test compile
 3. Built Variants = Unit Tests
 4. CtrlShiftT to add function to the test
+
+### Parsing JSON
+
+Project Structure -> Dependencies
+
+GSON Library is used to make Java objects based on JSON.
+
+1. Make a class to parse the JSON.
+2. Look for a String field called name, look for an object field called main, etc.
+3. Make wrapper return an instance of the WeatherResultModel.
