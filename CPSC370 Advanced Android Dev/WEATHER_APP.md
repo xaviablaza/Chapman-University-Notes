@@ -54,3 +54,6 @@ WeatherFragment.this
 
 execute("39834", "19284"), execute(new String[]{"92866"})
 
+## Gson Parsing
+
+WeatherResultModel[].class
