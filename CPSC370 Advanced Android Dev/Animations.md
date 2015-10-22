@@ -43,3 +43,5 @@ set.playTogether(spin, fade);
 set.setInterpolator(new AccelerateInterpolator());
 set.start();
 ```
+
+**Translation_x** stuff to move off-screen
