@@ -1,6 +1,6 @@
-# Chapman Uni Notes '15-'20
+# Chapman Uni Notes '15-'18
 
-These are the notes I have taken for my BS-CIS undergraduate degree, general education, and programming practice. I will also occasionally include anecdotes or any other relevant documents about my life experiences.
+These are the notes I have taken for my B.S. Software Engineering undergraduate degree, general education, and programming practice. I will also occasionally include anecdotes or any other relevant documents about my life experiences.
 
 *I personally believed that it was important to publically share any, if not all stories so that we could be able to produce even better ideas for ourselves and for society at large. I still hold that belief close to me to an extent; however, I now believe that we should be vigilant about who we share our life experiences with.*
 
