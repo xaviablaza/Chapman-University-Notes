@@ -1,0 +1,171 @@
+#include "LifeGrid.h"
+LifeGrid::LifeGrid(int mode_, int height_, int width_) {
+	mode = mode_;
+	genNum = 0;
+	height = height_;
+	width = width_;
+	arena = new char*[height];
+	for (int i=0; i<height; ++i) {
+		arena[i] = new char[width];
+	}
+}
+LifeGrid::LifeGrid(){}
+LifeGrid::~LifeGrid() {
+	for (int i=0; i<height; ++i) {
+		delete [] arena[i];
+	}
+	delete [] arena;
+}
+void LifeGrid::makeInitialMap(ifstream &f) {
+	int row = 0;
+	string line;
+	while (getline(f, line)) {
+		for (int i=0; i<line.size(); ++i) {
+			if (line[i] == '-') {
+				arena[row][i] = '-';
+			} else if (line[i] == 'X') {
+				arena[row][i] = 'X';
+			}
+		}
+		row++;
+	}
+}
+void LifeGrid::makeInitialMap(double density) {
+	int numCells = height*width*density;
+	for (int i=0; i<height; ++i) {
+		for (int j=0; j<width; ++j) {
+			int r = rand() % 2;
+			if (r==0) {
+				arena[i][j] = '-';
+			} else if (r==1) {
+				if (numCells==0) arena[i][j] = '-';
+				else arena[i][j] = 'X';
+			}
+			numCells--;
+		}
+	}
+}
+// begin adding to h here
+bool LifeGrid::isEmpty() {
+	for (int i=0; i<height; ++i) {
+		for (int j=0; j<width; ++j) {
+			if (arena[i][j] == 'X') return false;
+		}
+	}
+	return true;
+}
+void LifeGrid::printGenerationNumber() {
+	cout<<genNum<<endl;
+}
+void LifeGrid::printCurrentGeneration() {
+	for (int i=0; i<height; ++i) {
+		for (int j=0; j<width; ++j) {
+			cout<<arena[i][j];
+		}
+		cout<<endl;
+	}
+}
+void LifeGrid::makeNextGeneration() {
+	if (mode == 0) {
+		for (int i=0; i<height; ++i) {
+			// Check neighbors starting with north and moving clockwise
+			for (int j=0; j<width; ++j) {
+				// Check north side
+				// Check east side
+				// Check south side
+				// Check west side
+				int n;
+
+				// Check north neighbor
+				if (arena[i-1][j] == '-') {
+
+				} else if (arena[i-1][j] == 'X') {
+					n++;
+				} else if (arena[i-1][j] == 0) {
+
+				}
+
+// Check northeast neighbor
+				if (arena[i-1][j+1] == '-') {
+
+				} else if (arena[i-1][j+1] == 'X') {
+					n++;
+				} else if (arena[i-1][j+1] == 0) {
+
+				}
+
+// Check east neighbor
+				if (arena[i][j+1] == '-') {
+
+				} else if (arena[i][j+1] == 'X') {
+					n++;
+				} else if (arena[i][j+1] == 0) {
+
+				}
+
+// Check southeast neighbor
+				if (arena[i+1][j+1] == '-') {
+
+				} else if (arena[i+1][j+1] == 'X') {
+					n++;
+				} else if (arena[i+1][j+1] == 0) {
+
+				}
+
+// Check south neighbor
+				if (arena[i+1][j] == '-') {
+
+				} else if (arena[i+1][j] == 'X') {
+					n++;
+				} else if (arena[i+1][j] == 0) {
+
+				}
+// Check southwest neighbor
+				if (arena[i+1][j-1] == '-') {
+
+				} else if (arena[i+1][j-1] == 'X') {
+					n++;
+				} else if (arena[i+1][j-1] == 0) {
+
+				}
+
+// Check west neighbor
+				if (arena[i][j-1] == '-') {
+
+				} else if (arena[i][j-1] == 'X') {
+					n++;
+				} else if (arena[i][j-1] == 0) {
+
+				}
+				// Check northwest neighbor
+				if (arena[i-1][j-1] == '-') {
+
+				} else if (arena[i-1][j-1] == 'X') {
+					n++;
+				} else if (arena[i-1][j-1] == 0) {
+
+				}
+
+				if (n==0 || n==1) {
+// dies
+arena[i][j] = '-';
+				/*} else if (n==2) {*/
+// stays
+				} else if (n==3) {
+// produce
+arena[i][j] = 'X';
+				} else if (n>=4) {
+// dies
+arena[i][j] = '-';
+				}
+
+
+			
+				
+			}
+		}
+	} else if (mode == 1) {
+	} else if (mode == 2) {
+	}
+}
+void printGenerationsToFile(){}

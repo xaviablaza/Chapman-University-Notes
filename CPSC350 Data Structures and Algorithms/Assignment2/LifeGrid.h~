@@ -1,0 +1,26 @@
+#include <iostream>
+#include <fstream>
+#include <stdlib.h>
+#include <string>
+using namespace std;
+class LifeGrid {
+	private:
+		int mode;
+		int genNum;
+		int height;
+		int width;
+		// This is a pointer to a pointer to a char,
+		// set to point to an array of pointers to char
+		char **arena;
+	public:
+		LifeGrid(int mode_, int height, int width);
+		LifeGrid();
+		~LifeGrid();
+		void makeInitialMap(ifstream &f);
+		void makeInitialMap(double density);
+		bool isEmpty();
+		void printGenerationNumber();
+		void printCurrentGeneration();
+		void makeNextGeneration();
+		void printGenerationsToFile();
+};

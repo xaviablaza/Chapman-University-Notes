@@ -1,0 +1,19 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string>
+using namespace std;
+class LifeGrid {
+	private:
+
+		int mode;
+		int inputType;
+		int outputType;
+		bool *arena
+	public:
+		LifeGrid(int mode, int inputType, int outputType, int height, int width);
+		LifeGrid();
+		~LifeGrid();
+		void generateInitialMap(bool hasMapFile, ifstream *f);
+};
