@@ -10,7 +10,7 @@ Worked in a team of 3 using Git.
 
 **SMART Communications Intern - Android, MySQL (June 2014)**
 
-Tasked to create a contacts app to learn the Android API and relational database management systems (MySQL)
+Tasked to create a contacts app to learn the Android API and relational database management systems (MySQL).
 
 **International School Manila (ISM) Minecraft Club Founder/President (2014-15)**
 
@@ -36,6 +36,12 @@ Built Customer Relationship Management (CRM) / Point of Sales (POS) Software wit
 
 Tasked to create an Android app for the Applica website: http://www.applica.me 
 
-Worked in conjunction with a UI/UX mockup designer
+Worked in conjunction with a UI/UX mockup designer.
 
 Learned to use the Android Studio IDE, Gradle, RESTful API, OAUTH2, and Laravel.
+
+**Vivolytics.co - Android (2015)**
+
+Created weekly reports on feature developments.
+
+Contributed to the Vivolytics platform by responding to bug fixes.
