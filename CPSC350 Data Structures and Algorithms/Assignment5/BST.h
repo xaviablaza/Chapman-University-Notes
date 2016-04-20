@@ -1,0 +1,171 @@
+#include "TreeNode.h"
+template <class T>
+class BST {
+	public:
+		BST();
+		virtual ~BST(); // why virtual
+
+		void insert(T val);
+		bool contains(T val);
+		bool isEmpty();
+
+		T* getMax();
+		T* getMin();
+		TreeNode<T>* getSuccessor(TreeNode<T> *d); // used for deleting
+		bool deleteNode(T k);
+		void recursivePrint(TreeNode<T> *node);
+		void printTree();
+
+	private:
+		TreeNode<T> *root;
+};
+
+template <class T>
+BST<T>::BST() {
+	root = NULL;
+}
+
+template <class T>
+BST<T>::~BST() {
+	delete root;
+}
+
+template <class T>
+void BST<T>::insert(T val) {
+	TreeNode<T>* node = new TreeNode<T>(val);
+	if (root == NULL) root = node;
+	else {
+		TreeNode<T> *curr = root; // start at root
+		TreeNode<T> * parent;
+		while (true) {
+			parent = curr;
+			if (val < curr->key) { // go left
+				curr = curr->left;
+				if (curr == NULL) { // if it's null
+					parent->left = node; // insert
+					break;
+				}
+			} else {
+				curr = curr->right;
+				if (curr == NULL) {
+					parent->right = node;
+					break;
+				}
+			}
+		}
+	}
+}
+
+template <class T>
+bool BST<T>::contains(T val) {
+	if (root == NULL) return false;
+	else {
+		TreeNode<T> *curr = root; // start at root
+		while (curr->key != val) {
+			if (val < curr->key) curr = curr->left;
+			else curr = curr->right;
+			if (curr == NULL) return false; // we didn't find it
+		}
+	}
+}
+
+template <class T>
+bool BST<T>::isEmpty() {
+	return (root == NULL);
+}
+
+template <class T>
+T* BST<T>::getMax() {
+	TreeNode<T> *curr = root;
+	if (root == NULL) return NULL;
+	while (curr->right != NULL) {
+		curr = curr->right(); // Move along to the right most node
+	}
+	return &(curr->key);
+}
+
+template <class T>
+T* BST<T>::getMin() {
+	TreeNode<T> *curr = root;
+	if (root == NULL) return NULL;
+	while (curr->left != NULL) {
+		curr = curr->left(); // Move along to the left most node
+	}
+	return &(curr->key);
+}
+
+template <class T>
+TreeNode<T>* BST<T>::getSuccessor(TreeNode<T> *d) {// d is the node to be deleted
+	TreeNode<T>* sp = d;
+	TreeNode<T>* successor = d;
+	TreeNode<T>* curr = d->right;
+	while (curr != NULL) {
+		sp = successor;
+		successor = curr;
+		curr = curr->left;
+	}
+	if (successor != d->right) {
+		sp->left = successor->right;
+		successor->right = d->right;
+	}
+	return successor;
+}
+
+template <class T>
+bool BST<T>::deleteNode(T k) {
+	if (root == NULL) // empty tree
+		return false;
+	TreeNode<T> *curr = root;
+	TreeNode<T> *parent = root;
+	bool isLeft = true;
+	while ((curr->key) != k) { // search for node to be removed
+		parent = curr;
+		if (k<curr->key) {
+			isLeft = true;
+			curr = curr->left;
+		} else {
+			isLeft = false;
+			curr = curr->right;
+		}
+		if (curr == NULL) return false; // didn't find node
+	}
+	// TreeNode curr is now the node we want to delete after this line
+	if (curr->left == NULL && curr->right == NULL) { //If leaf node; no children
+		if (curr == root) root = NULL; // delete root
+		else if (isLeft) parent->left = NULL;
+		else parent->right = NULL;
+	} else if (curr->right == NULL) { // If curr only has a left node
+		if (curr == root) root = curr->left;
+		else if (isLeft) parent->left = curr->left;
+		else parent->right = curr->left;
+	} else if (curr->left == NULL) { // If curr only has a right node
+		if (curr == root) root = curr->right;
+		else if (isLeft) parent->left = curr->right;
+		else parent->right = curr->right;
+	} else { // If curr has both a left and right node
+		TreeNode<T> *succ = getSuccessor(curr);
+		// Link parent of curr to successor
+		if (curr == parent) {
+			curr = parent->left;
+			succ->left = curr;
+			root = succ;
+		} else {
+			if (isLeft) parent->left = succ; // check if node to be deleted is left of parent
+			else parent->right = succ; // check if node to be deleted is right of parent
+			succ->left = curr->left; // link successor to curr's left child
+		}
+	}
+}
+
+template <class T>
+void BST<T>::recursivePrint(TreeNode<T> *node) {
+	if (node == NULL) return;
+	recursivePrint(node->left);
+	cout<<node->key<<endl;
+	recursivePrint(node->right);
+}
+
+template <class T>
+void BST<T>::printTree() {
+	recursivePrint(root);
+}
