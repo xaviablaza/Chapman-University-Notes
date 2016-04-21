@@ -1,4 +1,5 @@
 #include "TreeNode.h"
+#include <fstream>
 template <class T>
 class BST {
 	public:
@@ -15,6 +16,8 @@ class BST {
 		bool deleteNode(T k);
 		void recursivePrint(TreeNode<T> *node);
 		void printTree();
+		void recursiveSerialize(ofstream &o, TreeNode<T> *node);
+		void writeToFile(string fileName);
 
 	private:
 		TreeNode<T> *root;
@@ -168,4 +171,20 @@ void BST<T>::recursivePrint(TreeNode<T> *node) {
 template <class T>
 void BST<T>::printTree() {
 	recursivePrint(root);
+}
+
+template <class T>
+void BST<T>::recursiveSerialize(ofstream &o, TreeNode<T> *node) {
+	if (node == NULL) return;
+	o<<node->key.serialize()<<"\n";
+	recursiveSerialize(o, node->left);
+	recursiveSerialize(o, node->right);
+}
+
+template <class T>
+void BST<T>::writeToFile(string fileName) {
+	ofstream o;
+	o.open(fileName.c_str(), ofstream::out | ofstream::trunc);
+	recursiveSerialize(o, root);
+	o.close();
 }

@@ -1,8 +1,8 @@
 // #include "InputHandler.h"
-#include <iostream>
 #include "BST.h"
 #include "StudentRecord.h"
 #include "FacultyRecord.h"
+#include <iostream>
 using namespace std;
 int main(int argc, char** argv) {
 
@@ -39,14 +39,6 @@ int main(int argc, char** argv) {
 	bool result = s1>s2;
 	cout<<result<<endl;*/
 
-	// Uncomment to test serialization
-	/*StudentRecord sr = StudentRecord(1252, "Chris Shiherlis", "Freshman", "Software Engineering", 4.0, 4598);
-	cout<<sr.serialize()<<endl;
-	FacultyRecord fr = FacultyRecord(12053, "Sierra Montalcini", "Doctor", "Schmid");
-	fr.addAdviseeId(1252);
-	fr.addAdviseeId(1253);
-	cout<<fr.serialize()<<endl;*/
-
 	// Uncomment to test removing a node based on its data
 	/*DoublyLinkedList<int> *dl = new DoublyLinkedList<int>();
 	dl->insertBack(1);
@@ -57,7 +49,26 @@ int main(int argc, char** argv) {
 	cout<<dl->removeFront()<<endl;
 	delete dl;*/
 
-	
+	// Uncomment to test serialization/deserialization
+	/*StudentRecord sr = StudentRecord(1252, "Chris Shiherlis", "Freshman", "Software Engineering", 4.0, 4598);
+	string serializedSr = sr.serialize();
+	cout<<serializedSr<<endl;
+	FacultyRecord fr = FacultyRecord(12053, "Sierra Montalcini", "Doctor", "Schmid");
+	fr.addAdviseeId(1252);
+	fr.addAdviseeId(1253);
+	string serializedFr = fr.serialize();
+	cout<<serializedFr<<endl;
+	StudentRecord sr2 = StudentRecord(serializedSr);
+	cout<<sr2.serialize()<<endl;
+	FacultyRecord fr2 = FacultyRecord(serializedFr);
+	cout<<fr2.serialize()<<endl;*/
+
+	BST<StudentRecord> bst = BST<StudentRecord>();
+	//TODO: Handling NULL advisorId
+	bst.insert(StudentRecord(1252, "Chris Shiherlis", "Freshman", "Software Engineering", 4.0, 4598));
+	bst.insert(StudentRecord(1253, "Frankie Minko", "Sophomore", "Biology", 3.5, 4599));
+	bst.insert(StudentRecord(1251, "Johnny Carmichael", "Senior", "Business", 3.0, 4600));
+	bst.writeToFile("studentTable");
 	
 	return 0;
 }

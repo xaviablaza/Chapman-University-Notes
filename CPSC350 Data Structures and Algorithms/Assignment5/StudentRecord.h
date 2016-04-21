@@ -1,12 +1,13 @@
 #include <string>
-#include <stdlib.h>
 #include <sstream>
+#include <stdlib.h>
 using namespace std;
 class StudentRecord {
 	public:
 		StudentRecord();
 		~StudentRecord();
 		StudentRecord(int id_, string name_, string level_, string major_, double gpa_, int advisorId_);
+		StudentRecord(string serializedSr);
 		string serialize();
 		
 		bool operator==(const StudentRecord &s) {
@@ -35,4 +36,6 @@ class StudentRecord {
 		string major;
 		double gpa;
 		int advisorId;
+	private:
+		void deserialize(string serializedSr);
 };

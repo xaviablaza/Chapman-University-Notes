@@ -19,6 +19,11 @@ FacultyRecord::FacultyRecord(int id_, string name_, string level_, string depart
 	adviseeIds = new DoublyLinkedList<int>();
 }
 
+FacultyRecord::FacultyRecord(string serializedFr) {
+	adviseeIds = new DoublyLinkedList<int>();
+	deserialize(serializedFr);
+}
+
 string FacultyRecord::serialize() {
 	ostringstream oss;
 	oss<<id<<','+name+','+level+','+department+',';
@@ -37,6 +42,20 @@ string FacultyRecord::serialize() {
 		oss<<'-';
 	}
 	return oss.str();
+}
+
+void FacultyRecord::deserialize(string serializedFr) {
+	stringstream ss(serializedFr);
+	string item;
+	int count = 0;
+	while (getline(ss, item, ',')) {
+		if (count == 0) id = atoi(item.c_str());
+		else if (count == 1) name = item;
+		else if (count == 2) level = item;
+		else if (count == 3) department = item;
+		else if (count >= 4) addAdviseeId(atoi(item.c_str()));
+		count++;
+	}
 }
 
 void FacultyRecord::addAdviseeId(int id) {
