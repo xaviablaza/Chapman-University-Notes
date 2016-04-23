@@ -17,6 +17,10 @@ class FacultyRecord {
 			return (this->id == f.id);
 		}
 
+		bool operator!=(const FacultyRecord &f) {
+			return (this->id != f.id);
+		}
+
 		bool operator<=(const FacultyRecord &f) {
 			return (this->id <= f.id);
 		}
@@ -33,7 +37,7 @@ class FacultyRecord {
 			return (this->id > f.id);
 		}
 
-		ostream& operator<<(ostream& os, const FacultyRecord& f) {
+		friend ostream& operator<<(ostream& os, const FacultyRecord &f) {
 			os<<"Faculty Member Name: "<<f.name<<endl;
 			os<<"Faculty ID: "<<f.id<<endl;
 			os<<"Level: "<<f.level<<endl;
@@ -53,6 +57,7 @@ class FacultyRecord {
 			} else {
 				os<<"None"<<endl;
 			}
+			return os;
 		}
 
 		int id;

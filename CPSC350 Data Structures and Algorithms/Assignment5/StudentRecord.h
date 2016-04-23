@@ -14,6 +14,10 @@ class StudentRecord {
 			return (this->id == s.id);
 		}
 
+		bool operator!=(const StudentRecord &s) {
+			return (this->id != s.id);
+		}
+
 		bool operator<=(const StudentRecord &s) {
 			return (this->id <= s.id);
 		}
@@ -30,13 +34,14 @@ class StudentRecord {
 			return (this->id > s.id);
 		}
 
-		ostream& operator<<(ostream& os, const StudentRecord& s) {
+		friend ostream& operator<<(ostream& os, const StudentRecord &s) {
 			os<<"Student Name: "<<s.name<<endl;
 			os<<"Student ID: "<<s.id<<endl;
 			os<<"Level: "<<s.level<<endl;
 			os<<"Major: "<<s.major<<endl;
 			os<<"GPA: "<<s.gpa<<endl;
 			os<<"Advisor ID: "<<s.advisorId<<endl;
+			return os;
 		}
 
 		int id;
