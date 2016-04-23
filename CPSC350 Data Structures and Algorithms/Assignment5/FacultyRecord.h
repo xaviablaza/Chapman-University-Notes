@@ -33,6 +33,28 @@ class FacultyRecord {
 			return (this->id > f.id);
 		}
 
+		ostream& operator<<(ostream& os, const FacultyRecord& f) {
+			os<<"Faculty Member Name: "<<f.name<<endl;
+			os<<"Faculty ID: "<<f.id<<endl;
+			os<<"Level: "<<f.level<<endl;
+			os<<"Department: "<<f.department<<endl;
+			os<<"Advisee IDs: ";
+			ListNode<int> *node = f.adviseeIds->head;
+			if (node != NULL) {
+				while (true) {
+					os<<node->data;
+					if (node->next == NULL) {
+						break;
+					} else {
+						os<<", ";
+						node = node->next;
+					}
+				}
+			} else {
+				os<<"None"<<endl;
+			}
+		}
+
 		int id;
 		string name;
 		string level;
