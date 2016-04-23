@@ -8,6 +8,8 @@ class BST {
 
 		void insert(T val);
 		bool contains(T val);
+		void printNode(T val);
+		T find(T val);
 		bool isEmpty();
 
 		T* getMax();
@@ -70,6 +72,35 @@ bool BST<T>::contains(T val) {
 			else curr = curr->right;
 			if (curr == NULL) return false; // we didn't find it
 		}
+		return true;
+	}
+}
+
+template <class T>
+void BST<T>::printNode(T val) {
+	if (root == NULL) cout<<"Node not found."<<endl;
+	else {
+		TreeNode<T> *curr = root; // start at root
+		while (curr->key != val) {
+			if (val < curr->key) curr = curr->left;
+			else curr = curr->right;
+			if (curr == NULL) cout<<"Node not found."<<endl; // we didn't find it
+		}
+		cout<<curr;
+	}
+}
+
+template <class T>
+T BST<T>::find(T val) {
+	if (root == NULL) return T();
+	else {
+		TreeNode<T> *curr = root; // start at root
+		while (curr->key != val) {
+			if (val < curr->key) curr = curr->left;
+			else curr = curr->right;
+			if (curr == NULL) return T(); // we didn't find it
+		}
+		return curr->key;
 	}
 }
 
