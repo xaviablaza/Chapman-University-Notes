@@ -18,6 +18,7 @@ class BST {
 		void printTree();
 		void recursiveSerialize(ofstream &o, TreeNode<T> *node);
 		void writeToFile(string fileName);
+		void loadFromFile(string fileName);
 
 	private:
 		TreeNode<T> *root;
@@ -187,4 +188,16 @@ void BST<T>::writeToFile(string fileName) {
 	o.open(fileName.c_str(), ofstream::out | ofstream::trunc);
 	recursiveSerialize(o, root);
 	o.close();
+}
+
+template <class T>
+void BST<T>::loadFromFile(string fileName) {
+	ifstream f;
+	f.open(fileName.c_str());
+	string line;
+	while (getline(f, line)) {
+		T node = T(line);
+		insert(node);
+	}
+	f.close();
 }

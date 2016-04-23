@@ -49,7 +49,8 @@ int main(int argc, char** argv) {
 	cout<<dl->removeFront()<<endl;
 	delete dl;*/
 
-	// Uncomment to test serialization/deserialization
+	// Uncomment to test StudentRecord serialization/deserialization
+	// Serialization
 	/*StudentRecord sr = StudentRecord(1252, "Chris Shiherlis", "Freshman", "Software Engineering", 4.0, 4598);
 	string serializedSr = sr.serialize();
 	cout<<serializedSr<<endl;
@@ -58,17 +59,23 @@ int main(int argc, char** argv) {
 	fr.addAdviseeId(1253);
 	string serializedFr = fr.serialize();
 	cout<<serializedFr<<endl;
+
+	// Deserialization
 	StudentRecord sr2 = StudentRecord(serializedSr);
 	cout<<sr2.serialize()<<endl;
 	FacultyRecord fr2 = FacultyRecord(serializedFr);
 	cout<<fr2.serialize()<<endl;*/
 
-	BST<StudentRecord> bst = BST<StudentRecord>();
+	/*BST<StudentRecord> bst = BST<StudentRecord>();
 	//TODO: Handling NULL advisorId
 	bst.insert(StudentRecord(1252, "Chris Shiherlis", "Freshman", "Software Engineering", 4.0, 4598));
 	bst.insert(StudentRecord(1253, "Frankie Minko", "Sophomore", "Biology", 3.5, 4599));
 	bst.insert(StudentRecord(1251, "Johnny Carmichael", "Senior", "Business", 3.0, 4600));
-	bst.writeToFile("studentTable");
-	
+	bst.writeToFile("studentTable");*/
+
+	// BST serialization and deserialization
+	BST<StudentRecord> bst = BST<StudentRecord>();
+	bst.loadFromFile("studentTable");
+	bst.writeToFile("test");
 	return 0;
 }
