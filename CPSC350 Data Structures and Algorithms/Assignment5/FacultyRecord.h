@@ -13,6 +13,26 @@ class FacultyRecord {
 		void addAdviseeId(int);
 		int removeAdviseeId(int);
 
+		bool operator==(const FacultyRecord &f) {
+			return (this->id == f.id);
+		}
+
+		bool operator<=(const FacultyRecord &f) {
+			return (this->id <= f.id);
+		}
+
+		bool operator<(const FacultyRecord &f) {
+			return (this->id < f.id);
+		}
+
+		bool operator>=(const FacultyRecord &f){
+			return (this->id >= f.id);
+		}
+
+		bool operator>(const FacultyRecord &f){
+			return (this->id > f.id);
+		}
+
 		int id;
 		string name;
 		string level;
