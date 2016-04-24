@@ -11,6 +11,14 @@ FacultyRecord::~FacultyRecord() {
 	delete adviseeIds;
 }
 
+FacultyRecord::FacultyRecord(int id_) {
+	id = id_;
+	name = "";
+	level = "";
+	department = "";
+	adviseeIds = new DoublyLinkedList<int>();
+}
+
 FacultyRecord::FacultyRecord(int id_, string name_, string level_, string department_) {
 	id = id_;
 	name = name_;

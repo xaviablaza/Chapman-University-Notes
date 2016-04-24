@@ -132,8 +132,7 @@ void Menu::printStudent() {
 }
 
 void Menu::printStudentInfo(int studentId) {
-	StudentRecord sr;
-	sr.id = studentId;
+	StudentRecord sr(studentId);
 	if (bstStudent.contains(sr)) {
 		bstStudent.printNode(sr);
 	} else {
@@ -148,8 +147,7 @@ void Menu::printFacultyMember() {
 }
 
 void Menu::printFacultyInfo(int facultyId) {
-	FacultyRecord fr;
-	fr.id = facultyId;
+	FacultyRecord fr(facultyId);
 	if (bstFaculty.contains(fr)) {
 		bstFaculty.printNode(fr);
 	} else {
@@ -158,24 +156,23 @@ void Menu::printFacultyInfo(int facultyId) {
 	}
 }
 
-//TODO: need erroring for null advisor
 void Menu::printAdvisor() {
-	int inputNum = promptInt("Enter student ID: ");
-	StudentRecord sr;
-	sr.id = inputNum;
+	int studentId = promptInt("Enter student ID: ");
+	StudentRecord sr(studentId);
 	StudentRecord val = bstStudent.find(sr);
 	if (val.id >= 0) {
-		printFacultyInfo(val.advisorId);
+		if (val.advisorId < 0) {
+			cout<<val.name<<" has no faculty advisor."<<endl;
+		} else printFacultyInfo(val.advisorId);
 	} else {
-		cout<<"Student ID "<<inputNum<<" not found."<<endl;
-		cout<<"Returning to menu..."<<endl;
+		cout<<"Student ID "<<studentId<<" not found."<<endl;
 	}
+	cout<<"Returning to menu..."<<endl;
 }
 
 void Menu::printAdvisees() {
-	int inputNum = promptInt("Enter faculty ID: ");
-	FacultyRecord fr;
-	fr.id = inputNum;
+	int facultyId = promptInt("Enter faculty ID: ");
+	FacultyRecord fr(facultyId);
 	FacultyRecord val = bstFaculty.find(fr);
 	if (val.id >= 0) {
 		ListNode<int> *node = val.adviseeIds->head;
@@ -192,13 +189,12 @@ void Menu::printAdvisees() {
 				}
 			}
 		} else {
-			cout<<"Faculty member has no advisees.";
-			cout<<"Returning to menu..."<<endl;
+			cout<<val.name<<" has no advisees.";
 		}
 	} else {
-		cout<<"Faculty ID "<<inputNum<<" not found."<<endl;
-		cout<<"Returning to menu..."<<endl;
+		cout<<"Faculty ID "<<facultyId<<" not found."<<endl;
 	}
+	cout<<"Returning to menu..."<<endl;
 }
 
 void Menu::addStudent() {

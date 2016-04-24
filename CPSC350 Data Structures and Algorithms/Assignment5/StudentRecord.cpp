@@ -5,10 +5,19 @@ StudentRecord::StudentRecord() {
 	level = "";
 	major = "";
 	gpa = -1.0;
-	advisorId  -1;
+	advisorId = -1;
 }
 
 StudentRecord::~StudentRecord(){}
+
+StudentRecord::StudentRecord(int id_) {
+	id = id_;
+	name = "";
+	level = "";
+	major = "";
+	gpa = -1.0;
+	advisorId = -1;
+}
 
 StudentRecord::StudentRecord(int id_, string name_, string level_, string major_, double gpa_, int advisorId_) {
 	id = id_;

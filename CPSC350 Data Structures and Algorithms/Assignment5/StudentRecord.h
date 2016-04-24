@@ -6,6 +6,7 @@ class StudentRecord {
 	public:
 		StudentRecord();
 		~StudentRecord();
+		StudentRecord(int id_);
 		StudentRecord(int id_, string name_, string level_, string major_, double gpa_, int advisorId_);
 		StudentRecord(string serializedSr);
 		string serialize();
@@ -40,7 +41,8 @@ class StudentRecord {
 			os<<"Level: "<<s.level<<endl;
 			os<<"Major: "<<s.major<<endl;
 			os<<"GPA: "<<s.gpa<<endl;
-			os<<"Advisor ID: "<<s.advisorId<<endl;
+			if (s.advisorId >= 0) os<<"Advisor ID: "<<s.advisorId<<endl;
+			else os<<"Advisor ID: None"<<endl;
 			return os;
 		}
 

@@ -7,6 +7,7 @@ class FacultyRecord {
 	public:
 		FacultyRecord();
 		~FacultyRecord();
+		FacultyRecord(int id_);
 		FacultyRecord(int id_, string name_, string level_, string department_);
 		FacultyRecord(string serializedFr);
 		string serialize();
