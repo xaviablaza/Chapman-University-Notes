@@ -23,25 +23,29 @@ bool Menu::isMalformedInt(string input) {
 }
 
 void Menu::printMenu() {
-	cout<<1<<". Print all student info (by ascending id)"<<endl;
-	cout<<2<<". Print all faculty info (by ascending id)"<<endl;
-	cout<<3<<". Print student info by student id"<<endl;
-	cout<<4<<". Print faculty info by faculty id"<<endl;
-	cout<<5<<". Print info of a student's faculty advisor"<<endl;
-	cout<<6<<". Print all advisees of a faculty member"<<endl;
-	cout<<7<<". Add a new student"<<endl;
-	cout<<8<<". Delete a student"<<endl;
-	cout<<9<<". Add a new faculty member"<<endl;
+	cout<<"--------------------MENU-------------------"<<endl;
+	cout<<1<<".  Print all student info (by ascending id)"<<endl;
+	cout<<2<<".  Print all faculty info (by ascending id)"<<endl;
+	cout<<3<<".  Print student info by student id"<<endl;
+	cout<<4<<".  Print faculty info by faculty id"<<endl;
+	cout<<5<<".  Print info of a student's faculty advisor"<<endl;
+	cout<<6<<".  Print all advisees of a faculty member"<<endl;
+	cout<<7<<".  Add a new student"<<endl;
+	cout<<8<<".  Delete a student"<<endl;
+	cout<<9<<".  Add a new faculty member"<<endl;
 	cout<<10<<". Delete a faculty member"<<endl;
 	cout<<11<<". Change a student's advisor"<<endl;
 	cout<<12<<". Remove an advisee from a faculty member"<<endl;
 	cout<<13<<". Rollback"<<endl;
 	cout<<14<<". Exit"<<endl;
+	cout<<"-------------------------------------------"<<endl;
+	cout<<"Enter an option: ";
 }
 
 void Menu::promptOption() {
 	string inputStr;
 	int inputNum;
+	printMenu();
 	while (true) {
 		cin>>inputStr;
 		if (isMalformedInt(inputStr)) {
@@ -49,10 +53,11 @@ void Menu::promptOption() {
 			continue;
 		}
 		inputNum = atoi(inputStr.c_str());
+		cout<<"-----------------OPTION "<<inputNum<<"-----------------"<<endl;
 		switch (inputNum) {
 			case 1:
 				printAllStudents();
-				continue;
+				break;
 			case 2:
 				printAllFaculty();
 				break;
@@ -91,7 +96,7 @@ void Menu::promptOption() {
 				break;
 			case 14:
 				exit();
-				break;
+				return;
 			default:
 				cout<<"Invalid option. Try again: ";
 				continue;
@@ -225,5 +230,5 @@ void Menu::rollback() {
 }
 
 void Menu::exit() {
-
+	cout<<"Exiting..."<<endl;
 }

@@ -86,7 +86,7 @@ void BST<T>::printNode(T val) {
 			else curr = curr->right;
 			if (curr == NULL) cout<<"Node not found."<<endl; // we didn't find it
 		}
-		cout<<curr;
+		cout<<curr->key;
 	}
 }
 

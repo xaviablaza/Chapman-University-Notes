@@ -1,7 +1,5 @@
 // #include "InputHandler.h"
-#include "BST.h"
-#include "StudentRecord.h"
-#include "FacultyRecord.h"
+#include "Menu.h"
 #include <iostream>
 using namespace std;
 int main(int argc, char** argv) {
@@ -74,8 +72,11 @@ int main(int argc, char** argv) {
 	bst.writeToFile("studentTable");*/
 
 	// BST serialization and deserialization
-	BST<StudentRecord> bst = BST<StudentRecord>();
+	/*BST<StudentRecord> bst = BST<StudentRecord>();
 	bst.loadFromFile("studentTable");
-	bst.writeToFile("test");
+	bst.writeToFile("test");*/
+
+	Menu menu;
+	menu.promptOption();
 	return 0;
 }
