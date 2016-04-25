@@ -197,8 +197,106 @@ void Menu::printAdvisees() {
 	cout<<"Returning to menu..."<<endl;
 }
 
-void Menu::addStudent() {
+void Menu::promptString(string promptMsg, string &input, bool nonEmpty) {
+	cout<<promptMsg;
+	while (true) {
+		//TODO: Fix promptInt()
+		getline(cin, input);
+		getline(cin, input);
 
+		for (int i=0; i<input.size(); ++i){
+			cout<<input[i];
+		}
+		cout<<input<<endl;
+		if (nonEmpty && input.empty()) { // nonEmpty = true if input must be nonEmpty
+			cout<<"Input must not be empty. Try again: ";
+		} else break;
+	}
+}
+
+// See: http://stackoverflow.com/questions/5932391/determining-if-a-string-is-a-double
+bool Menu::isOnlyDouble(const char* str) {
+	char* endptr = 0;
+	strtod(str, &endptr);
+	if (*endptr != '\0' || endptr == str)
+		return false;
+	return true;
+}
+
+void Menu::addStudent() {
+	// Enter student id
+	int id = promptInt("Enter student id: ");
+	// Enter student name
+	string promptMsg = "Enter student name: ";
+	string name;
+	promptString(promptMsg, name, true);
+	// Enter student level
+	cout<<"wtf"<<endl;
+	promptMsg = "Enter student level: ";
+	string level;
+	promptString(promptMsg, level, true);
+	// Enter major
+	promptMsg = "Enter student major: ";
+	string major;
+	promptString(promptMsg, major, true);
+	// Enter gpa
+	promptMsg = "Enter student GPA: ";
+	double gpa;	
+	while (true) {
+		string sgpa;
+		promptString(promptMsg, sgpa, true);
+		if (isOnlyDouble(sgpa.c_str())) {
+			cout<<"Malformed double. Try again: ";
+		} else {
+			gpa = atof(sgpa.c_str());
+			break;
+		}
+	}
+	// Enter advisorId
+	promptMsg = "Enter advisor ID: ";
+	string advisorId;
+	int advisorIdNum;
+	promptString(promptMsg, advisorId, false);
+	if (advisorId.empty()) {
+		advisorIdNum = -1;
+	} else {
+		advisorIdNum = atoi(advisorId.c_str());
+	}
+	// Check if there's the same stud id and abort
+	StudentRecord sr(id, name, level, major, gpa, advisorIdNum);
+	if (bstStudent.contains(sr)) {
+		cout<<"Student ID "<<id<<" already exists."<<endl;
+		cout<<"Returning to menu..."<<endl;
+		return;
+	}
+	// Check if advisorId exists. If exists allgood
+	FacultyRecord fr(advisorIdNum);
+	if (advisorIdNum == -1 || bstFaculty.contains(fr)) {
+		bstStudent.insert(sr);
+	} else {
+		promptMsg = "Advisor ID  " + advisorId + " does not exist. Continue? (y/n): ";
+		string answer;
+		bool continue_ = promptWarning(promptMsg, answer);
+		if (continue_) {
+			bstStudent.insert(sr);
+		}
+	}
+	// If nonempty advisorId does not exist, then warn user of breaking referential integrity
+	// If proceed, then add stud. If not, abort
+}
+
+bool Menu::promptWarning(string promptMsg, string &input) {
+	cout<<promptMsg<<endl;
+	while (true) {
+		getline(cin, input);
+		if (input == "y") {
+			return true;
+		} else if (input == "n") {
+			return false;
+		} else {
+			cout<<"Invalid input. Try again: ";
+		}
+	}
 }
 
 void Menu::deleteStudent() {

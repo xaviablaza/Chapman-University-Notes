@@ -37,4 +37,7 @@ class Menu {
 		int promptInt(string promptMsg);
 		void printStudentInfo(int studentId);
 		void printFacultyInfo(int facultyId);
+		bool isOnlyDouble(const char* str);
+		void promptString(string promptMsg, string &input, bool nonEmpty);
+		bool promptWarning(string promptMsg, string &input);
 };
