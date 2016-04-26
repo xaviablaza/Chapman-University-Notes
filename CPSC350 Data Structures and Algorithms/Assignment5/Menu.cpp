@@ -114,14 +114,18 @@ void Menu::printAllFaculty() {
 }
 
 int Menu::promptInt(string promptMsg) {
-	string inputStr;
+	string input;
 	cout<<promptMsg;
 	while (true) {
-		cin>>inputStr;
-		if (isMalformedInt(inputStr)) {
-			cout<<"Malformed int. Try again: ";
-			continue;
-		} else break;
+		getline(cin, input);
+		getline(cin, input);
+		if (!input.empty()) {
+			if (isMalformedInt(inputStr)) {
+				cout<<"Malformed int. Try again: ";
+			} else break;
+		} else {
+			cout<<"Input must not be empty. Try again: ";
+		}
 	}
 	return atoi(inputStr.c_str());
 }
@@ -231,7 +235,6 @@ void Menu::addStudent() {
 	string name;
 	promptString(promptMsg, name, true);
 	// Enter student level
-	cout<<"wtf"<<endl;
 	promptMsg = "Enter student level: ";
 	string level;
 	promptString(promptMsg, level, true);
@@ -289,6 +292,7 @@ bool Menu::promptWarning(string promptMsg, string &input) {
 	cout<<promptMsg<<endl;
 	while (true) {
 		getline(cin, input);
+		getline(cin, input);
 		if (input == "y") {
 			return true;
 		} else if (input == "n") {
@@ -300,11 +304,18 @@ bool Menu::promptWarning(string promptMsg, string &input) {
 }
 
 void Menu::deleteStudent() {
-
+	// Prompt for student id
+	// Check if student tree contains id
+		// check if faculty tree contains id
+		// if faculty tree contains id, promptWarning
+		// if yes remove student and display message to user
+		// else abort
+	// else
+		// display an error to the user
 }
 
 void Menu::addFacultyMember() {
-
+	
 }
 
 void Menu::deleteFacultyMember() {
