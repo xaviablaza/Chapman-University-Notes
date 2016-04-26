@@ -3,9 +3,9 @@
 template <class T>
 class BSTIterator {
 	public:
-		BSTIterator():
-		BSTIterator(TreeNode<T> *root);
+		BSTIterator();
 		~BSTIterator();
+		BSTIterator(TreeNode<T> *root);
 		bool hasNext();
 		T next();
 	private:
@@ -15,6 +15,12 @@ class BSTIterator {
 
 template <class T>
 BSTIterator<T>::BSTIterator(){}
+
+
+template <class T>
+BSTIterator<T>::~BSTIterator() {
+	delete stack;
+}
 
 template <class T>
 BSTIterator<T>::BSTIterator(TreeNode<T> *root) {
@@ -31,16 +37,11 @@ void BSTIterator<T>::recursivePush(TreeNode<T> *node) {
 }
 
 template <class T>
-BSTIterator<T>::~BSTIterator() {
-	delete stack;
-}
-
-template <class T>
 bool BSTIterator<T>::hasNext() {
-	return (!stack.isEmpty());
+	return (!stack->isEmpty());
 }
 
 template <class T>
 T BSTIterator<T>::next() {
-	return stack.pop();
+	return stack->pop();
 }

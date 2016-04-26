@@ -313,18 +313,20 @@ void Menu::deleteStudent() {
 
 		// TODO: need to work on iterator
 		// check if faculty tree contains id
-		BSTIterator it(bstStudent.getRoot());
+		BSTIterator<FacultyRecord> it(bstFaculty.getRoot());
 		while (it.hasNext()) {
 			FacultyRecord frt = it.next();
 			if (frt.containsAdviseeId(id)) {
 				string answer;
 				// If faculty tree contains id, promptWarning
+				string promptMsg;
+				bool continue_= promptWarning(promptMsg, answer);
+
 				if (continue_) {
 
 				}
-				bool continue_ = promptWarning(promptMsg, answer);
 				if (continue_) {	
-					bstStudent.remove
+					//bstStudent.remove
 				}
 				// if yes remove student and display message to user
 				// else abort
