@@ -65,10 +65,16 @@ int main(int argc, char** argv) {
 	cout<<fr2.serialize()<<endl;*/
 
 	/*BST<StudentRecord> bst = BST<StudentRecord>();
-	//TODO: Handling NULL advisorId
+	StudentRecord noAdvisor;
+	noAdvisor.id = 1254;
+	noAdvisor.name = "Skeeter Davis";
+	noAdvisor.level = "Junior";
+	noAdvisor.major = "Vocal Performance";
+	noAdvisor.gpa = 4.0;
 	bst.insert(StudentRecord(1252, "Chris Shiherlis", "Freshman", "Software Engineering", 4.0, 4598));
 	bst.insert(StudentRecord(1253, "Frankie Minko", "Sophomore", "Biology", 3.5, 4599));
 	bst.insert(StudentRecord(1251, "Johnny Carmichael", "Senior", "Business", 3.0, 4600));
+	bst.insert(noAdvisor);
 	bst.writeToFile("studentTable");*/
 
 	// BST serialization and deserialization

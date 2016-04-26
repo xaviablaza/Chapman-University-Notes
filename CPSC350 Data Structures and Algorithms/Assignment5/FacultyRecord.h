@@ -11,8 +11,9 @@ class FacultyRecord {
 		FacultyRecord(int id_, string name_, string level_, string department_);
 		FacultyRecord(string serializedFr);
 		string serialize();
-		void addAdviseeId(int);
-		int removeAdviseeId(int);
+		void addAdviseeId(int id);
+		int removeAdviseeId(int id);
+		bool containsAdviseeId(int id);
 
 		bool operator==(const FacultyRecord &f) {
 			return (this->id == f.id);

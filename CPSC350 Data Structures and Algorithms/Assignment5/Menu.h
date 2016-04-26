@@ -1,6 +1,7 @@
 #include "BST.h"
 #include "StudentRecord.h"
 #include "FacultyRecord.h"
+#include "BSTIterator.h"
 #include <iostream>
 #include <stdlib.h>
 #include <sys/stat.h>

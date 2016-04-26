@@ -120,14 +120,14 @@ int Menu::promptInt(string promptMsg) {
 		getline(cin, input);
 		getline(cin, input);
 		if (!input.empty()) {
-			if (isMalformedInt(inputStr)) {
+			if (isMalformedInt(input)) {
 				cout<<"Malformed int. Try again: ";
 			} else break;
 		} else {
 			cout<<"Input must not be empty. Try again: ";
 		}
 	}
-	return atoi(inputStr.c_str());
+	return atoi(input.c_str());
 }
 
 void Menu::printStudent() {
@@ -204,7 +204,6 @@ void Menu::printAdvisees() {
 void Menu::promptString(string promptMsg, string &input, bool nonEmpty) {
 	cout<<promptMsg;
 	while (true) {
-		//TODO: Fix promptInt()
 		getline(cin, input);
 		getline(cin, input);
 
@@ -305,13 +304,40 @@ bool Menu::promptWarning(string promptMsg, string &input) {
 
 void Menu::deleteStudent() {
 	// Prompt for student id
+	int id = promptInt("Enter student id: ");
 	// Check if student tree contains id
+	StudentRecord sr(id);
+	if (bstStudent.contains(sr)) {
+		FacultyRecord fr;
+		fr.addAdviseeId(id);
+
+		// TODO: need to work on iterator
 		// check if faculty tree contains id
-		// if faculty tree contains id, promptWarning
-		// if yes remove student and display message to user
-		// else abort
-	// else
-		// display an error to the user
+		BSTIterator it(bstStudent.getRoot());
+		while (it.hasNext()) {
+			FacultyRecord frt = it.next();
+			if (frt.containsAdviseeId(id)) {
+				string answer;
+				// If faculty tree contains id, promptWarning
+				if (continue_) {
+
+				}
+				bool continue_ = promptWarning(promptMsg, answer);
+				if (continue_) {	
+					bstStudent.remove
+				}
+				// if yes remove student and display message to user
+				// else abort
+			}
+		}
+
+
+
+
+	} else {
+		cout<<"Student ID "<<id<<" does not exist."<<endl;
+		cout<<"Returning to menu..."<<endl;
+	}
 }
 
 void Menu::addFacultyMember() {

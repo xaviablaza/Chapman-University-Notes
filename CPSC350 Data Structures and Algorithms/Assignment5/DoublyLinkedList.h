@@ -33,6 +33,8 @@ class DoublyLinkedList {
 		// Returns, but does not remove a T from the back of the list
 		T peekBack();
 
+		bool contains(T data);
+
 		// Gets the size of this list
 		unsigned int getSize();
 
@@ -129,6 +131,16 @@ template<class T>
 T DoublyLinkedList<T>::peekBack() {
 	return back->data;
 
+}
+
+template<class T>
+bool DoublyLinkedList<T>::contains(T data) {
+	ListNode<T> *temp = head;
+	while (temp != NULL) {
+		if (temp->data == data) return true;
+		else temp = temp->next;
+	}
+	return false;
 }
 
 template<class T>

@@ -73,3 +73,7 @@ void FacultyRecord::addAdviseeId(int id) {
 int FacultyRecord::removeAdviseeId(int id) {
 	return adviseeIds->remove(id);
 }
+
+bool FacultyRecord::containsAdviseeId(int id) {
+	return (adviseeIds->contains(id));
+}

@@ -21,7 +21,7 @@ class BST {
 		void recursiveSerialize(ofstream &o, TreeNode<T> *node);
 		void writeToFile(string fileName);
 		void loadFromFile(string fileName);
-
+		TreeNode<T>* getRoot();
 	private:
 		TreeNode<T> *root;
 };
@@ -231,4 +231,9 @@ void BST<T>::loadFromFile(string fileName) {
 		insert(node);
 	}
 	f.close();
+}
+
+template <class T>
+TreeNode<T>* BST<T>::getRoot() {
+	return root;
 }
