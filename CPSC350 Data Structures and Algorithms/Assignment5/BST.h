@@ -1,4 +1,6 @@
 #include "TreeNode.h"
+#include "FacultyRecord.h"
+#include "StudentRecord.h"
 #include <fstream>
 template <class T>
 class BST {
@@ -21,9 +23,36 @@ class BST {
 		void recursiveSerialize(ofstream &o, TreeNode<T> *node);
 		void writeToFile(string fileName);
 		void loadFromFile(string fileName);
-		TreeNode<T>* getRoot();
-	private:
+	protected:
 		TreeNode<T> *root;
+};
+
+class FacultyTable : public BST<FacultyRecord> {
+	public:
+		void recRemoveStudentId(TreeNode<FacultyRecord> *node, bool &abortCmd, int id) {
+			if (!abortCmd) {
+				if (node == NULL) return;
+				recursivePrint(node->left);
+				// If faculty tree contains id prompt the user and abort
+				if (node->key.containsAdviseeId(id)) {
+					abortCmd = true;
+					cout<<"ERROR: Faculty member has advisee with ID "<<id<<endl;
+					cout<<"Remove any conflicting advisee IDs before removing a student"<<endl;
+				}
+				recursivePrint(node->right);
+			} else return;
+		}
+		// returns false if command was not aborted
+		bool removeStudentId(int id) {
+			bool abortCmd = false;
+			recRemoveStudentId(root, abortCmd, id);
+			return abortCmd;
+		}
+};
+
+class StudentTable : public BST<StudentRecord> {
+	public:
+		// any FacultyRecord specific functions
 };
 
 template <class T>
@@ -231,9 +260,4 @@ void BST<T>::loadFromFile(string fileName) {
 		insert(node);
 	}
 	f.close();
-}
-
-template <class T>
-TreeNode<T>* BST<T>::getRoot() {
-	return root;
 }

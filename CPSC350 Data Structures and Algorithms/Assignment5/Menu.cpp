@@ -276,30 +276,10 @@ void Menu::addStudent() {
 	if (advisorIdNum == -1 || bstFaculty.contains(fr)) {
 		bstStudent.insert(sr);
 	} else {
-		promptMsg = "Advisor ID  " + advisorId + " does not exist. Continue? (y/n): ";
-		string answer;
-		bool continue_ = promptWarning(promptMsg, answer);
-		if (continue_) {
-			bstStudent.insert(sr);
-		}
+		cout<<"Advisor ID "<<advisorId<<" does not exist."<<endl;
 	}
 	// If nonempty advisorId does not exist, then warn user of breaking referential integrity
 	// If proceed, then add stud. If not, abort
-}
-
-bool Menu::promptWarning(string promptMsg, string &input) {
-	cout<<promptMsg<<endl;
-	while (true) {
-		getline(cin, input);
-		getline(cin, input);
-		if (input == "y") {
-			return true;
-		} else if (input == "n") {
-			return false;
-		} else {
-			cout<<"Invalid input. Try again: ";
-		}
-	}
 }
 
 void Menu::deleteStudent() {
@@ -310,32 +290,10 @@ void Menu::deleteStudent() {
 	if (bstStudent.contains(sr)) {
 		FacultyRecord fr;
 		fr.addAdviseeId(id);
-
-		// TODO: need to work on iterator
-		// check if faculty tree contains id
-		BSTIterator<FacultyRecord> it(bstFaculty.getRoot());
-		while (it.hasNext()) {
-			FacultyRecord frt = it.next();
-			if (frt.containsAdviseeId(id)) {
-				string answer;
-				// If faculty tree contains id, promptWarning
-				string promptMsg;
-				bool continue_= promptWarning(promptMsg, answer);
-
-				if (continue_) {
-
-				}
-				if (continue_) {	
-					//bstStudent.remove
-				}
-				// if yes remove student and display message to user
-				// else abort
-			}
+		bool successful = bstFaculty.removeStudentId(id);
+		if (!successful) {
+			bstStudent.deleteNode(sr);
 		}
-
-
-
-
 	} else {
 		cout<<"Student ID "<<id<<" does not exist."<<endl;
 		cout<<"Returning to menu..."<<endl;

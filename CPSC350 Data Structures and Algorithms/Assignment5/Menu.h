@@ -1,7 +1,4 @@
 #include "BST.h"
-#include "StudentRecord.h"
-#include "FacultyRecord.h"
-#include "BSTIterator.h"
 #include <iostream>
 #include <stdlib.h>
 #include <sys/stat.h>
@@ -31,8 +28,8 @@ class Menu {
 		void rollback();
 		void exit();
 	private:
-		BST<StudentRecord> bstStudent;
-		BST<FacultyRecord> bstFaculty;
+		StudentTable bstStudent;
+		FacultyTable bstFaculty;
 		bool isMalformedInt(string input);
 		void printMenu();
 		int promptInt(string promptMsg);
@@ -40,5 +37,4 @@ class Menu {
 		void printFacultyInfo(int facultyId);
 		bool isOnlyDouble(const char* str);
 		void promptString(string promptMsg, string &input, bool nonEmpty);
-		bool promptWarning(string promptMsg, string &input);
 };
