@@ -106,7 +106,7 @@ void Menu::promptOption() {
 }
 
 void Menu::printAllStudents() {
-	if (!bstStudent->isEmpty()) {
+	if (!bstStudent.isEmpty()) {
 	bstStudent.printTree();
 	} else {
 		cout<<"Student table is empty."<<endl;
@@ -114,7 +114,7 @@ void Menu::printAllStudents() {
 }
 
 void Menu::printAllFaculty() {
-	if (!bstFaculty->isEmpty()) {
+	if (!bstFaculty.isEmpty()) {
 	bstFaculty.printTree();
 	} else {
 		cout<<"Faculty table is empty."<<endl;
@@ -138,7 +138,7 @@ int Menu::promptInt(string promptMsg) {
 }
 
 void Menu::printStudent() {
-	if (!bstStudent->isEmpty()) {
+	if (!bstStudent.isEmpty()) {
 		int inputNum = promptInt("Enter student ID: ");
 		printStudentInfo(inputNum);
 	} else {
@@ -156,7 +156,7 @@ void Menu::printStudentInfo(int studentId) {
 }
 
 void Menu::printFacultyMember() {
-	if (!bstFaculty->isEmpty()) {
+	if (!bstFaculty.isEmpty()) {
 		int inputNum = promptInt("Enter faculty ID: ");
 		printFacultyInfo(inputNum);
 	} else {
@@ -174,10 +174,10 @@ void Menu::printFacultyInfo(int facultyId) {
 }
 
 void Menu::printAdvisor() {
-	if (!bstStudent->isEmpty()) {
+	if (!bstStudent.isEmpty()) {
 		int studentId = promptInt("Enter student ID: ");
 		StudentRecord sr(studentId);
-		StudentRecord val = bstStudent->find(sr);
+		StudentRecord val = bstStudent.find(sr);
 		if (val.id >= 0) {
 			if (val.advisorId < 0) {
 				cout<<val.name<<" has no faculty advisor."<<endl;
@@ -191,17 +191,17 @@ void Menu::printAdvisor() {
 }
 
 void Menu::printAdvisees() {
-	if (!bstFaculty->isEmpty()) {
+	if (!bstFaculty.isEmpty()) {
 		int facultyId = promptInt("Enter faculty ID: ");
 		FacultyRecord fr(facultyId);
-		FacultyRecord val = bstFaculty->find(fr);
+		FacultyRecord val = bstFaculty.find(fr);
 		if (val.id >= 0) {
 			ListNode<int> *node = val.adviseeIds->head;
 			if (node != NULL) {
 				while (true) {
 					StudentRecord sr;
 					sr.id = node->data;
-					StudentRecord stud = bstStudent->find(sr);
+					StudentRecord stud = bstStudent.find(sr);
 					cout<<stud.name<<endl;
 					if (node->next == NULL) {
 						break;
@@ -315,7 +315,7 @@ void Menu::addStudent() {
 }
 
 void Menu::deleteStudent() {
-	if (bstStudent->isEmpty()) {
+	if (bstStudent.isEmpty()) {
 		cout<<"Student table is empty. Add a student first before printing its info."<<endl;
 		return;
 	}
@@ -387,7 +387,7 @@ void Menu::addFacultyMember() {
 }
 
 void Menu::deleteFacultyMember() {
-	if (bstFaculty->isEmpty()) {
+	if (bstFaculty.isEmpty()) {
 		cout<<"Faculty table is empty. Add a faculty member first before printing its info."<<endl;
 		return;
 	}
@@ -410,7 +410,7 @@ void Menu::deleteFacultyMember() {
 }
 
 void Menu::changeAdvisor() {
-	if (bstStudent->isEmpty()) {
+	if (bstStudent.isEmpty()) {
 		cout<<"Student table is empty. Add a student first before printing its info."<<endl;
 		return;
 	}
@@ -440,7 +440,7 @@ void Menu::changeAdvisor() {
 }
 
 void Menu::removeAdvisee() {
-	if (bstFaculty->isEmpty()) {
+	if (bstFaculty.isEmpty()) {
 		cout<<"Faculty table is empty. Add a faculty member first before printing its info."<<endl;
 		return;
 	}
