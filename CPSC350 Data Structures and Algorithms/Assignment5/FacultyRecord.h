@@ -14,6 +14,7 @@ class FacultyRecord {
 		void addAdviseeId(int id);
 		int removeAdviseeId(int id);
 		bool containsAdviseeId(int id);
+		bool hasNoAdvisees();
 
 		bool operator==(const FacultyRecord &f) {
 			return (this->id == f.id);

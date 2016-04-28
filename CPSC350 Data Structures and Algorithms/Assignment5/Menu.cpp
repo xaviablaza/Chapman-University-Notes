@@ -291,8 +291,12 @@ void Menu::deleteStudent() {
 		FacultyRecord fr;
 		fr.addAdviseeId(id);
 		bool successful = bstFaculty.removeStudentId(id);
+		// successful = false if the student is not an advisee of any advisor
+		// could possibly just look at the advisor id and check if -1 then delete it
 		if (!successful) {
 			bstStudent.deleteNode(sr);
+		} else {
+			cout<<"Student has an advisor. Please change or remove student's advisor before deleting student."<<endl;
 		}
 	} else {
 		cout<<"Student ID "<<id<<" does not exist."<<endl;
@@ -301,19 +305,110 @@ void Menu::deleteStudent() {
 }
 
 void Menu::addFacultyMember() {
+	// Enter faculty id
+	int id = promptInt("Enter faculty id: ");
+	// Enter faculty name
+	string promptMsg = "Enter faculty name: ";
+	string name;
+	promptString(promptMsg, name, true);
+	// Enter faculty level
+	promptMsg = "Enter faculty level: ";
+	string level;
+	promptString(promptMsg, level, true);
+	// Enter faculty department
+	promptMsg = "Enter faculty department: ";
+	string department;
+	promptString(promptMsg, department, true);
 	
+	FacultyRecord fr(id, name, level, department);
+	
+	// Enter advisee IDs
+	cout<<"Enter a single advisee ID and press [Enter] to add it."<<endl;
+	cout<<"When you are finished adding IDs, type /done and press [Enter]"<<endl;
+	promptMsg = "Enter advisee ID: ";
+	string input;
+	cout<<promptMsg;
+	while (true) {
+		getline(cin, input);
+		getline(cin, input);
+
+		for (int i=0; i<input.size(); ++i){
+			cout<<input[i];
+		}
+		cout<<input<<endl;
+		if (input.empty()) { // nonEmpty = true if input must be nonEmpty
+			cout<<"Input must not be empty. Try again: ";
+		} else if (input == "/done") {
+			break;
+		} else if (!isMalformedInt(input)) {
+			int idNum = atoi(input.c_str());
+			fr.addAdviseeId(idNum);
+			cout<<promptMsg;
+		} else {
+			cout<<"Malformed int. Try again: ";
+		}
+	}
+	bstFaculty.insert(fr);
 }
 
 void Menu::deleteFacultyMember() {
-
+	// Prompt for faculty id
+	int id = promptInt("Enter faculty id: ");
+	// Check if faculty tree contains id
+	FacultyRecord fr(id);
+	FacultyRecord found = bstFaculty.find(fr);
+	if (found.id != -1) {
+		// Check if the advisee list is empty
+		if (found.hasNoAdvisees()) {
+			bstFaculty.deleteNode(found);
+		} else {
+			cout<<"Faculty ID "<<id<<" has advisees. Please remove advisees before deleting faculty member."<<endl;
+		}
+	} else {
+		cout<<"Faculty ID "<<id<<" does not exist."<<endl;
+		cout<<"Returning to menu..."<<endl;
+	}
 }
 
 void Menu::changeAdvisor() {
+	// Enter student id
+	int studId = promptInt("Enter student id: ");
+	StudentRecord sr(studId);
+	StudentRecord found = bstStudent.find(sr);
+	FacultyRecord old(found.advisorId);
+	if (found.id != -1) {
+		int facultyId = promptInt("Enter new advisor id: ");
+		FacultyRecord newr(facultyId);
+		if (bstFaculty.contains(newr)) {
+			sr.advisorId = facultyId;
+			// replace advisor id in the student tree
+			bstStudent.replaceAdvisorId(sr);
 
+			// replace student id in the faculty tree
+			bstFaculty.replaceStudentId(old, newr, studId);
+
+		} else {
+			cout<<"Faculty ID "<<facultyId<<" does not exist."<<endl;
+		}
+	} else {
+		cout<<"Student ID "<<studId<<" does not exist"<<endl;
+	}
 }
 
 void Menu::removeAdvisee() {
-
+	// Enter faculty id
+	int facultyId = promptInt("Enter faculty id: ");
+	FacultyRecord fr(facultyId);
+	FacultyRecord found = bstFaculty.find(fr);
+	if (found != -1) {
+		// Enter student id
+		int studId = promptInt("Enter student id: ");
+		if (found.containsAdviseeId(studId)) {
+			bstFaculty.removeAdviseeId(found, studId);
+		}
+	} else {
+		cout<<"Faculty ID "<<facultyId<<" does not exist."<<endl;
+	}
 }
 
 void Menu::rollback() {

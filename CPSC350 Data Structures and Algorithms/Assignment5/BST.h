@@ -42,17 +42,63 @@ class FacultyTable : public BST<FacultyRecord> {
 				recursivePrint(node->right);
 			} else return;
 		}
+
+		bool removeAdviseeId(FacultyRecord val, int adviseeId) {
+			if (root == NULL) return false;
+			else {
+				TreeNode<FacultyRecord> *curr = root; // start at root
+				while (curr->key != val) {
+					if (val < curr->key) curr = curr->left;
+					else curr = curr->right;
+					if (curr == NULL) return false; // we didn't find it
+				}
+				curr->key.removeAdviseeId(adviseeId);
+			}
+		}
+
 		// returns false if command was not aborted
 		bool removeStudentId(int id) {
 			bool abortCmd = false;
 			recRemoveStudentId(root, abortCmd, id);
 			return abortCmd;
 		}
+
+		bool replaceStudentId(FacultyRecord oldVal, FacultyRecord newVal, int studId) {
+			if (root == NULL) return false;
+			else {
+				TreeNode<FacultyRecord> *curr = root; // start at root
+				while (curr->key != oldVal) {
+					if (oldVal < curr->key) curr = curr->left;
+					else curr = curr->right;
+					if (curr == NULL) return false; // we didn't find it
+				}
+				curr->key.removeAdviseeId(studId);
+				curr = root; // start at root
+				while (curr->key != newVal) {
+					if (newVal < curr->key) curr = curr->left;
+					else curr = curr->right;
+					if (curr == NULL) return false; // we didn't find it
+				}
+				curr->key.addAdviseeId(studId);
+			}
+		}
 };
 
 class StudentTable : public BST<StudentRecord> {
 	public:
-		// any FacultyRecord specific functions
+		bool replaceAdvisorId(StudentRecord val) {
+			if (root == NULL) return false;
+			else {
+				TreeNode<StudentRecord> *curr = root; // start at root
+				while (curr->key != val) {
+					if (val < curr->key) curr = curr->left;
+					else curr = curr->right;
+					if (curr == NULL) return false; // we didn't find it
+				}
+				curr->key.advisorId = val.advisorId;
+				return true;
+			}
+		}
 };
 
 template <class T>

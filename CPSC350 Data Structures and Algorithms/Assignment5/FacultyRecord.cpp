@@ -77,3 +77,7 @@ int FacultyRecord::removeAdviseeId(int id) {
 bool FacultyRecord::containsAdviseeId(int id) {
 	return (adviseeIds->contains(id));
 }
+
+bool FacultyRecord::hasNoAdvisees() {
+	return (adviseeIds->isEmpty());
+}
