@@ -35,6 +35,6 @@ class Menu {
 		int promptInt(string promptMsg);
 		void printStudentInfo(int studentId);
 		void printFacultyInfo(int facultyId);
-		bool isOnlyDouble(const char* str);
+		bool isMalformedDouble(string input);
 		void promptString(string promptMsg, string &input, bool nonEmpty);
 };

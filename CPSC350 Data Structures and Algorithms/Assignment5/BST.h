@@ -117,7 +117,7 @@ void BST<T>::insert(T val) {
 	if (root == NULL) root = node;
 	else {
 		TreeNode<T> *curr = root; // start at root
-		TreeNode<T> * parent;
+		TreeNode<T> *parent;
 		while (true) {
 			parent = curr;
 			if (val < curr->key) { // go left

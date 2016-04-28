@@ -106,19 +106,26 @@ void Menu::promptOption() {
 }
 
 void Menu::printAllStudents() {
+	if (!bstStudent->isEmpty()) {
 	bstStudent.printTree();
+	} else {
+		cout<<"Student table is empty."<<endl;
+	}
 }
 
 void Menu::printAllFaculty() {
+	if (!bstFaculty->isEmpty()) {
 	bstFaculty.printTree();
+	} else {
+		cout<<"Faculty table is empty."<<endl;
+	}
 }
 
 int Menu::promptInt(string promptMsg) {
 	string input;
 	cout<<promptMsg;
 	while (true) {
-		getline(cin, input);
-		getline(cin, input);
+		getline(cin, input); // gets number input + \n
 		if (!input.empty()) {
 			if (isMalformedInt(input)) {
 				cout<<"Malformed int. Try again: ";
@@ -131,8 +138,12 @@ int Menu::promptInt(string promptMsg) {
 }
 
 void Menu::printStudent() {
-	int inputNum = promptInt("Enter student ID: ");
-	printStudentInfo(inputNum);
+	if (!bstStudent->isEmpty()) {
+		int inputNum = promptInt("Enter student ID: ");
+		printStudentInfo(inputNum);
+	} else {
+		cout<<"Student table is empty. Add a student first before printing its info."<<endl;
+	}
 }
 
 void Menu::printStudentInfo(int studentId) {
@@ -141,13 +152,16 @@ void Menu::printStudentInfo(int studentId) {
 		bstStudent.printNode(sr);
 	} else {
 		cout<<"Student ID "<<studentId<<" not found."<<endl;
-		cout<<"Returning to menu..."<<endl;
 	}
 }
 
 void Menu::printFacultyMember() {
-	int inputNum = promptInt("Enter faculty ID: ");
-	printFacultyInfo(inputNum);
+	if (!bstFaculty->isEmpty()) {
+		int inputNum = promptInt("Enter faculty ID: ");
+		printFacultyInfo(inputNum);
+	} else {
+		cout<<"Faculty table is empty. Add a faculty member first before printing its info."<<endl;
+	}
 }
 
 void Menu::printFacultyInfo(int facultyId) {
@@ -156,57 +170,60 @@ void Menu::printFacultyInfo(int facultyId) {
 		bstFaculty.printNode(fr);
 	} else {
 		cout<<"Faculty ID "<<facultyId<<" not found."<<endl;
-		cout<<"Returning to menu..."<<endl;
 	}
 }
 
 void Menu::printAdvisor() {
-	int studentId = promptInt("Enter student ID: ");
-	StudentRecord sr(studentId);
-	StudentRecord val = bstStudent.find(sr);
-	if (val.id >= 0) {
-		if (val.advisorId < 0) {
-			cout<<val.name<<" has no faculty advisor."<<endl;
-		} else printFacultyInfo(val.advisorId);
+	if (!bstStudent->isEmpty()) {
+		int studentId = promptInt("Enter student ID: ");
+		StudentRecord sr(studentId);
+		StudentRecord val = bstStudent->find(sr);
+		if (val.id >= 0) {
+			if (val.advisorId < 0) {
+				cout<<val.name<<" has no faculty advisor."<<endl;
+			} else printFacultyInfo(val.advisorId);
+		} else {
+			cout<<"Student ID "<<studentId<<" not found."<<endl;
+		}
 	} else {
-		cout<<"Student ID "<<studentId<<" not found."<<endl;
+		cout<<"Student table is empty. Add a student first before printing its info."<<endl;
 	}
-	cout<<"Returning to menu..."<<endl;
 }
 
 void Menu::printAdvisees() {
-	int facultyId = promptInt("Enter faculty ID: ");
-	FacultyRecord fr(facultyId);
-	FacultyRecord val = bstFaculty.find(fr);
-	if (val.id >= 0) {
-		ListNode<int> *node = val.adviseeIds->head;
-		if (node != NULL) {
-			while (true) {
-				StudentRecord sr;
-				sr.id = node->data;
-				StudentRecord stud = bstStudent.find(sr);
-				cout<<stud.name<<endl;
-				if (node->next == NULL) {
-					break;
-				} else {
-					node = node->next;
+	if (!bstFaculty->isEmpty()) {
+		int facultyId = promptInt("Enter faculty ID: ");
+		FacultyRecord fr(facultyId);
+		FacultyRecord val = bstFaculty->find(fr);
+		if (val.id >= 0) {
+			ListNode<int> *node = val.adviseeIds->head;
+			if (node != NULL) {
+				while (true) {
+					StudentRecord sr;
+					sr.id = node->data;
+					StudentRecord stud = bstStudent->find(sr);
+					cout<<stud.name<<endl;
+					if (node->next == NULL) {
+						break;
+					} else {
+						node = node->next;
+					}
 				}
+			} else {
+				cout<<val.name<<" has no advisees.";
 			}
 		} else {
-			cout<<val.name<<" has no advisees.";
+			cout<<"Faculty ID "<<facultyId<<" not found."<<endl;
 		}
 	} else {
-		cout<<"Faculty ID "<<facultyId<<" not found."<<endl;
+		cout<<"Faculty table is empty. Add a faculty member first before printing its info."<<endl;
 	}
-	cout<<"Returning to menu..."<<endl;
 }
 
 void Menu::promptString(string promptMsg, string &input, bool nonEmpty) {
 	cout<<promptMsg;
 	while (true) {
 		getline(cin, input);
-		getline(cin, input);
-
 		for (int i=0; i<input.size(); ++i){
 			cout<<input[i];
 		}
@@ -218,15 +235,24 @@ void Menu::promptString(string promptMsg, string &input, bool nonEmpty) {
 }
 
 // See: http://stackoverflow.com/questions/5932391/determining-if-a-string-is-a-double
-bool Menu::isOnlyDouble(const char* str) {
-	char* endptr = 0;
-	strtod(str, &endptr);
-	if (*endptr != '\0' || endptr == str)
-		return false;
-	return true;
+bool Menu::isMalformedDouble(string input) {
+	bool hasPoint = false;
+	if (input.size() == 1 && !isdigit(input[0])) return true;
+	if (input[input.size()-1] == '.') return true;
+	for (int i=0; i<input.size()-1; ++i) {
+		if (input[i] == '.') {
+			if (hasPoint) return true;
+			else hasPoint = true;
+		} else if(!isdigit(input[i])) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void Menu::addStudent() {
+	string hack;
+	getline(cin, hack);
 	// Enter student id
 	int id = promptInt("Enter student id: ");
 	// Enter student name
@@ -244,17 +270,24 @@ void Menu::addStudent() {
 	// Enter gpa
 	promptMsg = "Enter student GPA: ";
 	double gpa;	
+	cout<<promptMsg;
 	while (true) {
 		string sgpa;
-		promptString(promptMsg, sgpa, true);
-		if (isOnlyDouble(sgpa.c_str())) {
+		getline(cin, sgpa);
+		if (sgpa.empty()) {
+			cout<<"Input must not be empty. Try again: ";
+			continue;
+		}
+		if (isMalformedDouble(sgpa)) {
 			cout<<"Malformed double. Try again: ";
+			continue;
 		} else {
 			gpa = atof(sgpa.c_str());
 			break;
 		}
 	}
 	// Enter advisorId
+	cout<<"Press [Enter] to skip adding an advisor ID."<<endl;
 	promptMsg = "Enter advisor ID: ";
 	string advisorId;
 	int advisorIdNum;
@@ -268,7 +301,6 @@ void Menu::addStudent() {
 	StudentRecord sr(id, name, level, major, gpa, advisorIdNum);
 	if (bstStudent.contains(sr)) {
 		cout<<"Student ID "<<id<<" already exists."<<endl;
-		cout<<"Returning to menu..."<<endl;
 		return;
 	}
 	// Check if advisorId exists. If exists allgood
@@ -283,6 +315,10 @@ void Menu::addStudent() {
 }
 
 void Menu::deleteStudent() {
+	if (bstStudent->isEmpty()) {
+		cout<<"Student table is empty. Add a student first before printing its info."<<endl;
+		return;
+	}
 	// Prompt for student id
 	int id = promptInt("Enter student id: ");
 	// Check if student tree contains id
@@ -300,7 +336,6 @@ void Menu::deleteStudent() {
 		}
 	} else {
 		cout<<"Student ID "<<id<<" does not exist."<<endl;
-		cout<<"Returning to menu..."<<endl;
 	}
 }
 
@@ -352,6 +387,11 @@ void Menu::addFacultyMember() {
 }
 
 void Menu::deleteFacultyMember() {
+	if (bstFaculty->isEmpty()) {
+		cout<<"Faculty table is empty. Add a faculty member first before printing its info."<<endl;
+		return;
+	}
+
 	// Prompt for faculty id
 	int id = promptInt("Enter faculty id: ");
 	// Check if faculty tree contains id
@@ -366,11 +406,15 @@ void Menu::deleteFacultyMember() {
 		}
 	} else {
 		cout<<"Faculty ID "<<id<<" does not exist."<<endl;
-		cout<<"Returning to menu..."<<endl;
 	}
 }
 
 void Menu::changeAdvisor() {
+	if (bstStudent->isEmpty()) {
+		cout<<"Student table is empty. Add a student first before printing its info."<<endl;
+		return;
+	}
+
 	// Enter student id
 	int studId = promptInt("Enter student id: ");
 	StudentRecord sr(studId);
@@ -396,6 +440,11 @@ void Menu::changeAdvisor() {
 }
 
 void Menu::removeAdvisee() {
+	if (bstFaculty->isEmpty()) {
+		cout<<"Faculty table is empty. Add a faculty member first before printing its info."<<endl;
+		return;
+	}
+
 	// Enter faculty id
 	int facultyId = promptInt("Enter faculty id: ");
 	FacultyRecord fr(facultyId);
