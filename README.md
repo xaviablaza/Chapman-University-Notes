@@ -1,4 +1,4 @@
-# Chapman Uni Notes '15-'18
+# Chapman Uni Notes '15-'19
 
 These are the notes I have taken for my B.S. Software Engineering undergraduate degree, general education, and programming practice. I will also occasionally include anecdotes or any other relevant documents about my life experiences.
 
