@@ -44,7 +44,7 @@ app.get('/todos', authenticate, (req, res) => {
 });
 
 // GET /todos/12341234
-app.get('/todos/:id', (req, res) => {
+app.get('/todos/:id', authenticate, (req, res) => {
 	var id = req.params.id;
 	// res.send(req.params);
 
@@ -55,7 +55,10 @@ app.get('/todos/:id', (req, res) => {
 	}
 
   	// findById
-  	Todo.findById(id).then((todo) => {
+  	Todo.findOne({
+			_id: id,
+			_creator: req.user._id
+		}).then((todo) => {
   		if (!todo) {
   			return res.status(404).send();
   		}
@@ -65,7 +68,7 @@ app.get('/todos/:id', (req, res) => {
   	});
 });
 
-app.delete('/todos/:id', (req, res) => {
+app.delete('/todos/:id', authenticate, (req, res) => {
 	// get the id
 	var id = req.params.id;
 
@@ -74,7 +77,10 @@ app.delete('/todos/:id', (req, res) => {
 		return res.status(404).send();
 	}
 
-	Todo.findByIdAndRemove(id).then((todo) => {
+	Todo.findOneAndRemove({
+		_id: id,
+		_creator: req.user._id
+	}).then((todo) => {
 		if (!todo) {
 			return res.status(404).send();
 		}
@@ -84,7 +90,7 @@ app.delete('/todos/:id', (req, res) => {
 	});
 });
 
-app.patch('/todos/:id', (req, res) => {
+app.patch('/todos/:id', authenticate, (req, res) => {
 	var id = req.params.id;
 	// Subset of things that the user sent to us (we don't want them to enter a completedAt field)
 	var body = _.pick(req.body, ['text', 'completed']);
@@ -102,7 +108,10 @@ app.patch('/todos/:id', (req, res) => {
 	}
 
 	// Update the body to the database
-	Todo.findByIdAndUpdate(id, {$set: body}, {new: true}).then((todo) => {
+	Todo.findOneAndUpdate({
+		_id: id,
+		_creator: req.user._id
+	}, {$set: body}, {new: true}).then((todo) => {
 		if (!todo) {
 			return res.status(404).send();
 		}
