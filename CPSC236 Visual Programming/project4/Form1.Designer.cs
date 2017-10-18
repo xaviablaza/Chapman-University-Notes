@@ -28,91 +28,99 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnEnterName = new System.Windows.Forms.Button();
-            this.listboxName = new System.Windows.Forms.ListBox();
-            this.btnDeleteName = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddBook = new System.Windows.Forms.Button();
+            this.listboxBook = new System.Windows.Forms.ListBox();
+            this.btnDeleteBook = new System.Windows.Forms.Button();
+            this.btnViewBook = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label13 = new System.Windows.Forms.Label();
+            this.bookYearLabel = new System.Windows.Forms.Label();
+            this.yearLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.bookYear = new System.Windows.Forms.TextBox();
+            this.bookGenre = new System.Windows.Forms.TextBox();
+            this.bookAuthor = new System.Windows.Forms.TextBox();
+            this.bookTitle = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.movieDirector = new System.Windows.Forms.TextBox();
+            this.movieTitle = new System.Windows.Forms.TextBox();
+            this.movieYear = new System.Windows.Forms.TextBox();
+            this.movieGenre = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBoxMovie = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.gameYear = new System.Windows.Forms.TextBox();
+            this.gameTitle = new System.Windows.Forms.TextBox();
+            this.gameGenre = new System.Windows.Forms.TextBox();
+            this.gameDeveloper = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.listboxGame = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnEnterName
+            // btnAddBook
             // 
-            this.btnEnterName.Location = new System.Drawing.Point(58, 417);
-            this.btnEnterName.Name = "btnEnterName";
-            this.btnEnterName.Size = new System.Drawing.Size(75, 40);
-            this.btnEnterName.TabIndex = 2;
-            this.btnEnterName.Text = "Add";
-            this.btnEnterName.UseVisualStyleBackColor = true;
-            this.btnEnterName.Click += new System.EventHandler(this.btnEnterName_Click);
+            this.btnAddBook.Location = new System.Drawing.Point(58, 417);
+            this.btnAddBook.Name = "btnAddBook";
+            this.btnAddBook.Size = new System.Drawing.Size(75, 40);
+            this.btnAddBook.TabIndex = 2;
+            this.btnAddBook.Text = "Add";
+            this.btnAddBook.UseVisualStyleBackColor = true;
+            this.btnAddBook.Click += new System.EventHandler(this.btnEnterName_Click);
             // 
-            // listboxName
+            // listboxBook
             // 
-            this.listboxName.DisplayMember = "(none)";
-            this.listboxName.FormattingEnabled = true;
-            this.listboxName.Location = new System.Drawing.Point(0, 183);
-            this.listboxName.Name = "listboxName";
-            this.listboxName.Size = new System.Drawing.Size(432, 186);
-            this.listboxName.TabIndex = 3;
-            this.listboxName.SelectedIndexChanged += new System.EventHandler(this.listboxName_SelectedIndexChanged);
+            this.listboxBook.DisplayMember = "(none)";
+            this.listboxBook.FormattingEnabled = true;
+            this.listboxBook.Location = new System.Drawing.Point(0, 183);
+            this.listboxBook.Name = "listboxBook";
+            this.listboxBook.Size = new System.Drawing.Size(432, 186);
+            this.listboxBook.TabIndex = 3;
+            this.listboxBook.SelectedIndexChanged += new System.EventHandler(this.listboxName_SelectedIndexChanged);
             // 
-            // btnDeleteName
+            // btnDeleteBook
             // 
-            this.btnDeleteName.Location = new System.Drawing.Point(284, 417);
-            this.btnDeleteName.Name = "btnDeleteName";
-            this.btnDeleteName.Size = new System.Drawing.Size(75, 40);
-            this.btnDeleteName.TabIndex = 4;
-            this.btnDeleteName.Text = "Delete ";
-            this.btnDeleteName.UseVisualStyleBackColor = true;
-            this.btnDeleteName.Click += new System.EventHandler(this.btnDeleteName_Click);
+            this.btnDeleteBook.Location = new System.Drawing.Point(284, 417);
+            this.btnDeleteBook.Name = "btnDeleteBook";
+            this.btnDeleteBook.Size = new System.Drawing.Size(75, 40);
+            this.btnDeleteBook.TabIndex = 4;
+            this.btnDeleteBook.Text = "Delete ";
+            this.btnDeleteBook.UseVisualStyleBackColor = true;
+            this.btnDeleteBook.Click += new System.EventHandler(this.btnDeleteName_Click);
             // 
-            // button1
+            // btnViewBook
             // 
-            this.button1.Location = new System.Drawing.Point(172, 417);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(74, 41);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "View";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnViewBook.Location = new System.Drawing.Point(172, 417);
+            this.btnViewBook.Margin = new System.Windows.Forms.Padding(2);
+            this.btnViewBook.Name = "btnViewBook";
+            this.btnViewBook.Size = new System.Drawing.Size(74, 41);
+            this.btnViewBook.TabIndex = 5;
+            this.btnViewBook.Text = "View";
+            this.btnViewBook.UseVisualStyleBackColor = true;
+            this.btnViewBook.Click += new System.EventHandler(this.btnViewBook_Click);
             // 
             // tabControl1
             // 
@@ -128,18 +136,21 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label13);
+            this.tabPage1.Controls.Add(this.bookYearLabel);
+            this.tabPage1.Controls.Add(this.yearLabel);
             this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.btnDeleteName);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.btnDeleteBook);
+            this.tabPage1.Controls.Add(this.btnViewBook);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.btnEnterName);
+            this.tabPage1.Controls.Add(this.btnAddBook);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.textBox4);
-            this.tabPage1.Controls.Add(this.textBox3);
-            this.tabPage1.Controls.Add(this.textBox2);
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.listboxName);
+            this.tabPage1.Controls.Add(this.bookYear);
+            this.tabPage1.Controls.Add(this.bookGenre);
+            this.tabPage1.Controls.Add(this.bookAuthor);
+            this.tabPage1.Controls.Add(this.bookTitle);
+            this.tabPage1.Controls.Add(this.listboxBook);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
@@ -148,6 +159,30 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Book ";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(55, 384);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(0, 13);
+            this.label13.TabIndex = 14;
+            // 
+            // bookYearLabel
+            // 
+            this.bookYearLabel.AutoSize = true;
+            this.bookYearLabel.Location = new System.Drawing.Point(7, 72);
+            this.bookYearLabel.Name = "bookYearLabel";
+            this.bookYearLabel.Size = new System.Drawing.Size(0, 13);
+            this.bookYearLabel.TabIndex = 13;
+            // 
+            // yearLabel
+            // 
+            this.yearLabel.AutoSize = true;
+            this.yearLabel.Location = new System.Drawing.Point(248, 164);
+            this.yearLabel.Name = "yearLabel";
+            this.yearLabel.Size = new System.Drawing.Size(0, 13);
+            this.yearLabel.TabIndex = 12;
             // 
             // label4
             // 
@@ -185,48 +220,50 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Title";
             // 
-            // textBox4
+            // bookYear
             // 
-            this.textBox4.Location = new System.Drawing.Point(249, 137);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(170, 20);
-            this.textBox4.TabIndex = 7;
+            this.bookYear.Location = new System.Drawing.Point(249, 137);
+            this.bookYear.Name = "bookYear";
+            this.bookYear.Size = new System.Drawing.Size(170, 20);
+            this.bookYear.TabIndex = 7;
             // 
-            // textBox3
+            // bookGenre
             // 
-            this.textBox3.Location = new System.Drawing.Point(5, 137);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(167, 20);
-            this.textBox3.TabIndex = 6;
+            this.bookGenre.Location = new System.Drawing.Point(5, 137);
+            this.bookGenre.Name = "bookGenre";
+            this.bookGenre.Size = new System.Drawing.Size(167, 20);
+            this.bookGenre.TabIndex = 6;
             // 
-            // textBox2
+            // bookAuthor
             // 
-            this.textBox2.Location = new System.Drawing.Point(248, 49);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(171, 20);
-            this.textBox2.TabIndex = 5;
+            this.bookAuthor.Location = new System.Drawing.Point(248, 49);
+            this.bookAuthor.Name = "bookAuthor";
+            this.bookAuthor.Size = new System.Drawing.Size(171, 20);
+            this.bookAuthor.TabIndex = 5;
             // 
-            // textBox1
+            // bookTitle
             // 
-            this.textBox1.Location = new System.Drawing.Point(5, 49);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(167, 20);
-            this.textBox1.TabIndex = 4;
+            this.bookTitle.Location = new System.Drawing.Point(5, 49);
+            this.bookTitle.Name = "bookTitle";
+            this.bookTitle.Size = new System.Drawing.Size(167, 20);
+            this.bookTitle.TabIndex = 4;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label15);
+            this.tabPage2.Controls.Add(this.label14);
             this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.button2);
-            this.tabPage2.Controls.Add(this.textBox8);
-            this.tabPage2.Controls.Add(this.textBox7);
-            this.tabPage2.Controls.Add(this.textBox6);
-            this.tabPage2.Controls.Add(this.textBox5);
+            this.tabPage2.Controls.Add(this.movieDirector);
+            this.tabPage2.Controls.Add(this.movieTitle);
+            this.tabPage2.Controls.Add(this.movieYear);
+            this.tabPage2.Controls.Add(this.movieGenre);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.listBox1);
+            this.tabPage2.Controls.Add(this.listBoxMovie);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
@@ -236,6 +273,22 @@
             this.tabPage2.Text = "Movie ";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(51, 383);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(0, 13);
+            this.label15.TabIndex = 13;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(252, 181);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(0, 13);
+            this.label14.TabIndex = 12;
+            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(278, 412);
@@ -244,6 +297,7 @@
             this.button4.TabIndex = 11;
             this.button4.Text = "Delete";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -253,6 +307,7 @@
             this.button3.TabIndex = 10;
             this.button3.Text = "Add";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -262,34 +317,35 @@
             this.button2.TabIndex = 9;
             this.button2.Text = "View";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // textBox8
+            // movieDirector
             // 
-            this.textBox8.Location = new System.Drawing.Point(246, 64);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(173, 20);
-            this.textBox8.TabIndex = 8;
+            this.movieDirector.Location = new System.Drawing.Point(246, 64);
+            this.movieDirector.Name = "movieDirector";
+            this.movieDirector.Size = new System.Drawing.Size(173, 20);
+            this.movieDirector.TabIndex = 8;
             // 
-            // textBox7
+            // movieTitle
             // 
-            this.textBox7.Location = new System.Drawing.Point(5, 64);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(173, 20);
-            this.textBox7.TabIndex = 7;
+            this.movieTitle.Location = new System.Drawing.Point(5, 64);
+            this.movieTitle.Name = "movieTitle";
+            this.movieTitle.Size = new System.Drawing.Size(173, 20);
+            this.movieTitle.TabIndex = 7;
             // 
-            // textBox6
+            // movieYear
             // 
-            this.textBox6.Location = new System.Drawing.Point(246, 141);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(173, 20);
-            this.textBox6.TabIndex = 6;
+            this.movieYear.Location = new System.Drawing.Point(246, 141);
+            this.movieYear.Name = "movieYear";
+            this.movieYear.Size = new System.Drawing.Size(173, 20);
+            this.movieYear.TabIndex = 6;
             // 
-            // textBox5
+            // movieGenre
             // 
-            this.textBox5.Location = new System.Drawing.Point(5, 141);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(170, 20);
-            this.textBox5.TabIndex = 5;
+            this.movieGenre.Location = new System.Drawing.Point(5, 141);
+            this.movieGenre.Name = "movieGenre";
+            this.movieGenre.Size = new System.Drawing.Size(170, 20);
+            this.movieGenre.TabIndex = 5;
             // 
             // label8
             // 
@@ -327,28 +383,30 @@
             this.label5.TabIndex = 1;
             this.label5.Text = "Title";
             // 
-            // listBox1
+            // listBoxMovie
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(7, 207);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(405, 186);
-            this.listBox1.TabIndex = 0;
+            this.listBoxMovie.FormattingEnabled = true;
+            this.listBoxMovie.Location = new System.Drawing.Point(7, 207);
+            this.listBoxMovie.Name = "listBoxMovie";
+            this.listBoxMovie.Size = new System.Drawing.Size(405, 160);
+            this.listBoxMovie.TabIndex = 0;
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label17);
+            this.tabPage3.Controls.Add(this.label16);
             this.tabPage3.Controls.Add(this.button7);
             this.tabPage3.Controls.Add(this.button6);
             this.tabPage3.Controls.Add(this.button5);
-            this.tabPage3.Controls.Add(this.textBox12);
-            this.tabPage3.Controls.Add(this.textBox11);
-            this.tabPage3.Controls.Add(this.textBox10);
-            this.tabPage3.Controls.Add(this.textBox9);
+            this.tabPage3.Controls.Add(this.gameYear);
+            this.tabPage3.Controls.Add(this.gameTitle);
+            this.tabPage3.Controls.Add(this.gameGenre);
+            this.tabPage3.Controls.Add(this.gameDeveloper);
             this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.listBox2);
+            this.tabPage3.Controls.Add(this.listboxGame);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
@@ -356,6 +414,22 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Game";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(59, 384);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(0, 13);
+            this.label17.TabIndex = 13;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(247, 154);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(0, 13);
+            this.label16.TabIndex = 12;
             // 
             // button7
             // 
@@ -365,6 +439,7 @@
             this.button7.TabIndex = 11;
             this.button7.Text = "Delete";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
@@ -374,6 +449,7 @@
             this.button6.TabIndex = 10;
             this.button6.Text = "Add";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -383,34 +459,35 @@
             this.button5.TabIndex = 9;
             this.button5.Text = "View";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // textBox12
+            // gameYear
             // 
-            this.textBox12.Location = new System.Drawing.Point(247, 127);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(174, 20);
-            this.textBox12.TabIndex = 8;
+            this.gameYear.Location = new System.Drawing.Point(247, 127);
+            this.gameYear.Name = "gameYear";
+            this.gameYear.Size = new System.Drawing.Size(174, 20);
+            this.gameYear.TabIndex = 8;
             // 
-            // textBox11
+            // gameTitle
             // 
-            this.textBox11.Location = new System.Drawing.Point(3, 74);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(173, 20);
-            this.textBox11.TabIndex = 7;
+            this.gameTitle.Location = new System.Drawing.Point(3, 74);
+            this.gameTitle.Name = "gameTitle";
+            this.gameTitle.Size = new System.Drawing.Size(173, 20);
+            this.gameTitle.TabIndex = 7;
             // 
-            // textBox10
+            // gameGenre
             // 
-            this.textBox10.Location = new System.Drawing.Point(3, 127);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(173, 20);
-            this.textBox10.TabIndex = 6;
+            this.gameGenre.Location = new System.Drawing.Point(3, 127);
+            this.gameGenre.Name = "gameGenre";
+            this.gameGenre.Size = new System.Drawing.Size(173, 20);
+            this.gameGenre.TabIndex = 6;
             // 
-            // textBox9
+            // gameDeveloper
             // 
-            this.textBox9.Location = new System.Drawing.Point(247, 74);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(174, 20);
-            this.textBox9.TabIndex = 5;
+            this.gameDeveloper.Location = new System.Drawing.Point(247, 74);
+            this.gameDeveloper.Name = "gameDeveloper";
+            this.gameDeveloper.Size = new System.Drawing.Size(174, 20);
+            this.gameDeveloper.TabIndex = 5;
             // 
             // label12
             // 
@@ -448,13 +525,13 @@
             this.label9.TabIndex = 1;
             this.label9.Text = "Title";
             // 
-            // listBox2
+            // listboxGame
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(9, 181);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(404, 212);
-            this.listBox2.TabIndex = 0;
+            this.listboxGame.FormattingEnabled = true;
+            this.listboxGame.Location = new System.Drawing.Point(9, 181);
+            this.listboxGame.Name = "listboxGame";
+            this.listboxGame.Size = new System.Drawing.Size(404, 186);
+            this.listboxGame.TabIndex = 0;
             // 
             // Form1
             // 
@@ -465,6 +542,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "My ListBox Form";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -477,10 +555,10 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnEnterName;
-        private System.Windows.Forms.ListBox listboxName;
-        private System.Windows.Forms.Button btnDeleteName;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAddBook;
+        private System.Windows.Forms.ListBox listboxBook;
+        private System.Windows.Forms.Button btnDeleteBook;
+        private System.Windows.Forms.Button btnViewBook;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -489,34 +567,41 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox bookYear;
+        private System.Windows.Forms.TextBox bookGenre;
+        private System.Windows.Forms.TextBox bookAuthor;
+        private System.Windows.Forms.TextBox bookTitle;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.ListBox listBoxMovie;
+        private System.Windows.Forms.TextBox movieDirector;
+        private System.Windows.Forms.TextBox movieTitle;
+        private System.Windows.Forms.TextBox movieYear;
+        private System.Windows.Forms.TextBox movieGenre;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.ListBox listboxGame;
+        private System.Windows.Forms.TextBox gameYear;
+        private System.Windows.Forms.TextBox gameTitle;
+        private System.Windows.Forms.TextBox gameGenre;
+        private System.Windows.Forms.TextBox gameDeveloper;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label yearLabel;
+        private System.Windows.Forms.Label bookYearLabel;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
     }
 }
 

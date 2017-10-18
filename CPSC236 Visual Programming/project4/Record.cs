@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinForms_ListBox
 {
-    class Record
+    public class Record
     {
         public string Title { get; set; }
 
@@ -17,5 +17,5 @@ namespace WinForms_ListBox
         public RecordType RecordType { get; set; }
     }
 
-    enum RecordType { Book, Movie, Game }
+    public enum RecordType { Book, Movie, Game }
 }
