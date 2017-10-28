@@ -17,7 +17,7 @@ Let’s start off with what a very simple formula that we use to spark people’
 3. Edify the professionals or mentors that you know who are helping the organization.
 4. Follow up with them within 24 to 48 hours after your initial contact (this is what I call the 24/48 rule).
 5. Set up another meeting with them and give them options (e.g. “are you free Monday or Wednesday?”).
-6, Invite them to your meeting and show them the wonderful world of UX.
+6. Invite them to your meeting and show them the wonderful world of UX.
 
 I realized that what makes people not attend club meetings regularly is that people consider their time very important. It’s hard to get people to do one more extracurricular task outside the tasks outside of class that they already have to do. But like any good growth hacker, there will always be a specific way to persuade someone, and entice someone that being a part of your organization is necessary for their success.
 
