@@ -40,8 +40,8 @@ data MoBettaToken
   | LBrace -- Left Brace (DONE)
   | RBrace -- Right Brace (DONE)
   | IntConst Integer --  The number itself 1,2,3
-  | BoolConst Bool -- The boolean value
-  | BoolOp Char
+  | BoolConst Bool -- The boolean value true,false
+  | BoolOp Char -- & |
   | ArithOp Char
   | WhileKeyword String
   | IfKeyword String
@@ -60,16 +60,7 @@ keywords = ["while", "if", "then", "else", "print", "message", "read"]
 --  in its original state.
 identifier :: Parser String
 identifier = (lexeme . try) p
-  where| Id String
-| LParen
-| RParen
-| LBrace
-| RBrace
-| IntConst Integer
-| BoolConst Boolean
-| BoolOp
-| ArithOp
-| Relation
+  where
     p = (:) <$> letterChar <*> many alphaNumChar
 
 identifier' :: Parser MoBettaToken
@@ -89,7 +80,6 @@ intConst' = fmap Constant intConst
 stringLiteral :: Parser String
 stringLiteral = char '"' *> manyTill L.charLiteral (char '"')
 
-lparen' :: Parser MoBettaToken
 stringLiteral' :: Parser MoBettaToken
 stringLiteral' = fmap StringLiteral stringLiteral
 
