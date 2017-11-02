@@ -1,32 +1,76 @@
-import Text.Megaparsec -- the main combinator library
-import Text.Megaparsec.Char -- various basic parsers for characters
+module MoBettaLexa where
+
+import Text.Megaparsec
+import Text.Megaparsec.Char -- various basic parsers
 import qualified Text.Megaparsec.Char.Lexer as L -- This avoids name clashes with Prelude.
+
+
+-- The following makes things simpler by setting up no additional state '()
+--   and restricting to a string parser.
 
 type Parser = Parsec () String
 
+-- The module Megaparsec defines a function
+--   `parse :: Parsec e s a -> String -> s -> Either (ParseError (Token s) e) a`
+-- So we get
+--   `parse :: Parser a -> String -> String -> Either (ParseError (Token String) ()) a`
+
+
 -- space1 is a parser from Text.Megaparsec.Char that will consume one or more whitespaces
--- L.space is a combinator that combines its first argument to consume space characters and its 2nd and 3rd arguments to specify how comments are formed.
+-- L.space is a lexical analyzer that uses its first arguement to consume space characters and ignores comments per its 2nd and 3rd arguments
 -- L.skipLineComment matches its 1st argument then ignores everything to end of line
 -- L.skipblockComment matches begin- and end-comment strings and ignores everything between
 
 spaceConsumer :: Parser ()
 spaceConsumer = L.space space1 lineCmnt blockCmnt
   where
-    -- how you want comments to start
     lineCmnt  = L.skipLineComment "//"
-    -- how you want block comments to start and end
     blockCmnt = L.skipBlockComment "/*" "*/"
 
 -- Define a wrapper that consumes space after a parser
 lexeme :: Parser a -> Parser a
 lexeme = L.lexeme spaceConsumer
 
-keywords = ["while", "if", "then", "else", "print", "printmsg","read"]
+data MoBettaToken
+  = Identifier String -- Identifier or Keyword (ALMOST DONE)
+  | Constant Integer -- Integer (DONE)
+  | StringLiteral String -- Quoted String (DONE)
+  | LParen -- Left Parenthesis (DONE)
+  | RParen -- Right Parenthesis (DONE)
+  | LBrace -- Left Brace (DONE)
+  | RBrace -- Right Brace (DONE)
+  | IntConst Integer --  The number itself 1,2,3
+  | BoolConst Bool -- The boolean value
+  | BoolOp Char
+  | ArithOp Char
+  | WhileKeyword String
+  | IfKeyword String
+  | ThenKeyword String
+  | ElseKeyword String
+  | PrintKeyword String
+  | ReadKeyword String
+  deriving (Show, Eq)
 
+keywords = ["while", "if", "then", "else", "print", "message", "read"]
+
+-- Identifiers are defined as consisting of an alpha character followed
+--  by any number of alphanumeric characters.
+--  `lexeme` ignores trialing whitespace and comments. 'try' rewinds the parser
+--  so that if it fails, it does not produce an error, leaving the stream
+--  in its original state.
 identifier :: Parser String
-identifier = (lexeme . try) $ (:) <$> letterChar <*> many alphaNumChar
-
-data MoBettaToken = Identifier String | Constant Integer
+identifier = (lexeme . try) p
+  where| Id String
+| LParen
+| RParen
+| LBrace
+| RBrace
+| IntConst Integer
+| BoolConst Boolean
+| BoolOp
+| ArithOp
+| Relation
+    p = (:) <$> letterChar <*> many alphaNumChar
 
 identifier' :: Parser MoBettaToken
 identifier' = fmap Identifier identifier
@@ -41,3 +85,34 @@ intConst = (lexeme . try) ic
 
 intConst' :: Parser MoBettaToken
 intConst' = fmap Constant intConst
+
+stringLiteral :: Parser String
+stringLiteral = char '"' *> manyTill L.charLiteral (char '"')
+
+lparen' :: Parser MoBettaToken
+stringLiteral' :: Parser MoBettaToken
+stringLiteral' = fmap StringLiteral stringLiteral
+
+lparen :: Parser Char
+lparen = (lexeme . try ) (char '(')
+
+lparen' :: Parser MoBettaToken
+lparen' = lparen *> return LParen
+
+rparen :: Parser Char
+rparen = (lexeme . try ) (char ')')
+
+rparen' :: Parser MoBettaToken
+rparen' = rparen *> return RParen
+
+lbrace :: Parser Char
+lbrace = (lexeme . try ) (char '{')
+
+lbrace' :: Parser MoBettaToken
+lbrace' = lbrace *> return LBrace
+
+rbrace :: Parser Char
+rbrace = (lexeme . try ) (char '}')
+
+rbrace' :: Parser MoBettaToken
+rbrace' = rbrace *> return RBrace
