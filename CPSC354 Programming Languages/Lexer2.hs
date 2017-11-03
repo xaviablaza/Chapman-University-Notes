@@ -43,7 +43,7 @@ data MoBettaToken
   | BoolConst Bool -- The boolean value true,false
   | BoolOp Char -- & | (DONE)
   | ArithOp Char -- (DONE)
-  | Relation String
+  | Relation String -- (DONE)
   | Keyword String
   deriving (Show, Eq)
 
