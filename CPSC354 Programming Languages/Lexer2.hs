@@ -39,15 +39,12 @@ data MoBettaToken
   | RParen -- Right Parenthesis (DONE)
   | LBrace -- Left Brace (DONE)
   | RBrace -- Right Brace (DONE)
-  | IntConst Integer --  The number itself 1,2,3 (DONE)
-  | BoolConst Bool -- The boolean value true,false
-  | BoolOp Char -- & | (DONE)
+  | BoolConst String -- The boolean value true,false
+  | BoolOp Char -- ~ & | (DONE)
   | ArithOp Char -- (DONE)
   | Relation String -- (DONE)
-  | Keyword String
+  | Keyword String -- (DONE)
   deriving (Show, Eq)
-
-keywords = ["while", "if", "then", "else", "print", "message", "read"]
 
 -- Identifiers are defined as consisting of an alpha character followed
 --  by any number of alphanumeric characters.
@@ -103,20 +100,35 @@ rbrace = (lexeme . try ) (char '}')
 rbrace' :: Parser MoBettaToken
 rbrace' = rbrace *> return RBrace
 
+arithops = ['+','-','*','/','%']
 arithop :: Parser Char
-arithop = (lexeme . try) $ oneOf(['+','-','*','/','%'])
+arithop = (lexeme . try) $ oneOf(arithops)
 
 arithop' :: Parser MoBettaToken
 arithop' = fmap ArithOp arithop
 
+boolops = ['~','|','&']
 boolop :: Parser Char
-boolop = (lexeme . try) $ oneOf(['~','|','&'])
+boolop = (lexeme . try) $ oneOf(boolops)
 
 boolop' :: Parser MoBettaToken
 boolop' = fmap BoolOp boolop
 
 relation :: Parser String
-relation = string "<=" <|> string ">=" <|> string ">" <|> string "<"
+relation = (lexeme . try) $ string "<=" <|> string ">=" <|> string ">" <|> string "<" <|> string "==" <|> string "!="
 
 relation' :: Parser MoBettaToken
 relation' = fmap Relation relation 
+
+boolconst :: Parser String
+boolconst = (lexeme . try) $ string "true" <|> string "false"
+
+boolconst' :: Parser MoBettaToken
+boolconst' = fmap BoolConst boolconst
+
+--keywords = ["while", "if", "then", "else", "print", "message", "read"]
+keyword :: Parser String
+keyword = (lexeme . try) $ string "while" <|> string "if" <|> string "then" <|> string "else" <|> string "print" <|> string "message" <|> string "read"
+
+keyword' :: Parser MoBettaToken
+keyword' = fmap Keyword keyword
