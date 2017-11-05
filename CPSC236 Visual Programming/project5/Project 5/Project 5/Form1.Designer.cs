@@ -49,6 +49,12 @@
             this.birthdatePicker = new System.Windows.Forms.DateTimePicker();
             this.bloodTypePicker = new System.Windows.Forms.ComboBox();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.nameSearchBox = new System.Windows.Forms.TextBox();
+            this.searchNameBtn = new System.Windows.Forms.Button();
+            this.bloodTypeFilter = new System.Windows.Forms.ComboBox();
+            this.filterBloodBtn = new System.Windows.Forms.Button();
+            this.showAllRecordsBtn = new System.Windows.Forms.Button();
+            this.filterLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,21 +69,21 @@
             series1.Name = "BBR";
             series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Single;
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(401, 505);
+            this.chart1.Size = new System.Drawing.Size(401, 616);
             this.chart1.TabIndex = 0;
             // 
             // donorListBox
             // 
             this.donorListBox.FormattingEnabled = true;
-            this.donorListBox.Location = new System.Drawing.Point(7, 209);
+            this.donorListBox.Location = new System.Drawing.Point(6, 256);
             this.donorListBox.Margin = new System.Windows.Forms.Padding(2);
             this.donorListBox.Name = "donorListBox";
-            this.donorListBox.Size = new System.Drawing.Size(399, 290);
+            this.donorListBox.Size = new System.Drawing.Size(399, 173);
             this.donorListBox.TabIndex = 1;
             // 
             // viewData
             // 
-            this.viewData.Location = new System.Drawing.Point(21, 506);
+            this.viewData.Location = new System.Drawing.Point(20, 609);
             this.viewData.Margin = new System.Windows.Forms.Padding(2);
             this.viewData.Name = "viewData";
             this.viewData.Size = new System.Drawing.Size(109, 27);
@@ -88,7 +94,7 @@
             // 
             // delete
             // 
-            this.delete.Location = new System.Drawing.Point(287, 506);
+            this.delete.Location = new System.Drawing.Point(286, 609);
             this.delete.Margin = new System.Windows.Forms.Padding(2);
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(105, 28);
@@ -197,13 +203,13 @@
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(166, 20);
             this.addButton.TabIndex = 19;
-            this.addButton.Text = "Add";
+            this.addButton.Text = "Add Donor Record";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // changeDataOpen
             // 
-            this.changeDataOpen.Location = new System.Drawing.Point(154, 507);
+            this.changeDataOpen.Location = new System.Drawing.Point(153, 610);
             this.changeDataOpen.Margin = new System.Windows.Forms.Padding(2);
             this.changeDataOpen.Name = "changeDataOpen";
             this.changeDataOpen.Size = new System.Drawing.Size(104, 27);
@@ -245,11 +251,81 @@
             this.errorLabel.Size = new System.Drawing.Size(0, 13);
             this.errorLabel.TabIndex = 24;
             // 
+            // nameSearchBox
+            // 
+            this.nameSearchBox.Location = new System.Drawing.Point(20, 552);
+            this.nameSearchBox.Name = "nameSearchBox";
+            this.nameSearchBox.Size = new System.Drawing.Size(237, 20);
+            this.nameSearchBox.TabIndex = 25;
+            // 
+            // searchNameBtn
+            // 
+            this.searchNameBtn.Location = new System.Drawing.Point(286, 549);
+            this.searchNameBtn.Name = "searchNameBtn";
+            this.searchNameBtn.Size = new System.Drawing.Size(105, 23);
+            this.searchNameBtn.TabIndex = 26;
+            this.searchNameBtn.Text = "Search Full Name";
+            this.searchNameBtn.UseVisualStyleBackColor = true;
+            this.searchNameBtn.Click += new System.EventHandler(this.searchNameBtn_Click);
+            // 
+            // bloodTypeFilter
+            // 
+            this.bloodTypeFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.bloodTypeFilter.FormattingEnabled = true;
+            this.bloodTypeFilter.Items.AddRange(new object[] {
+            "O+",
+            "O-",
+            "A+",
+            "A-",
+            "B+",
+            "B-",
+            "AB+",
+            "AB-"});
+            this.bloodTypeFilter.Location = new System.Drawing.Point(20, 497);
+            this.bloodTypeFilter.Name = "bloodTypeFilter";
+            this.bloodTypeFilter.Size = new System.Drawing.Size(237, 21);
+            this.bloodTypeFilter.TabIndex = 27;
+            // 
+            // filterBloodBtn
+            // 
+            this.filterBloodBtn.Location = new System.Drawing.Point(286, 497);
+            this.filterBloodBtn.Name = "filterBloodBtn";
+            this.filterBloodBtn.Size = new System.Drawing.Size(105, 23);
+            this.filterBloodBtn.TabIndex = 28;
+            this.filterBloodBtn.Text = "Filter Blood Type";
+            this.filterBloodBtn.UseVisualStyleBackColor = true;
+            this.filterBloodBtn.Click += new System.EventHandler(this.filterBloodBtn_Click);
+            // 
+            // showAllRecordsBtn
+            // 
+            this.showAllRecordsBtn.Location = new System.Drawing.Point(20, 450);
+            this.showAllRecordsBtn.Name = "showAllRecordsBtn";
+            this.showAllRecordsBtn.Size = new System.Drawing.Size(385, 23);
+            this.showAllRecordsBtn.TabIndex = 29;
+            this.showAllRecordsBtn.Text = "Show All Records";
+            this.showAllRecordsBtn.UseVisualStyleBackColor = true;
+            this.showAllRecordsBtn.Click += new System.EventHandler(this.showAllRecordsBtn_Click);
+            // 
+            // filterLabel
+            // 
+            this.filterLabel.AutoSize = true;
+            this.filterLabel.Location = new System.Drawing.Point(6, 238);
+            this.filterLabel.Name = "filterLabel";
+            this.filterLabel.Size = new System.Drawing.Size(83, 13);
+            this.filterLabel.TabIndex = 30;
+            this.filterLabel.Text = "No filter applied.";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(835, 545);
+            this.ClientSize = new System.Drawing.Size(835, 647);
+            this.Controls.Add(this.filterLabel);
+            this.Controls.Add(this.showAllRecordsBtn);
+            this.Controls.Add(this.filterBloodBtn);
+            this.Controls.Add(this.bloodTypeFilter);
+            this.Controls.Add(this.searchNameBtn);
+            this.Controls.Add(this.nameSearchBox);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.bloodTypePicker);
             this.Controls.Add(this.birthdatePicker);
@@ -300,6 +376,12 @@
         private System.Windows.Forms.DateTimePicker birthdatePicker;
         private System.Windows.Forms.ComboBox bloodTypePicker;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.TextBox nameSearchBox;
+        private System.Windows.Forms.Button searchNameBtn;
+        private System.Windows.Forms.ComboBox bloodTypeFilter;
+        private System.Windows.Forms.Button filterBloodBtn;
+        private System.Windows.Forms.Button showAllRecordsBtn;
+        private System.Windows.Forms.Label filterLabel;
     }
 }
 

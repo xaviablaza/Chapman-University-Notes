@@ -14,12 +14,12 @@ namespace Project_5
     public partial class Change_Details : Form
     {
         Form1 form1ref;
-        Donor Donor;
+        Donor oldDonor;
         public Change_Details(Form1 form1ref, Donor donor)
         {
             InitializeComponent();
             this.form1ref = form1ref;
-            this.Donor = donor;
+            oldDonor = donor;
             lastNameText.Text = donor.LastName;
             firstNameText.Text = donor.FirstName;
             addressText.Text = donor.Address;
@@ -60,10 +60,13 @@ namespace Project_5
                 bloodTypePicker.Text = "";
 
                 // Update the donor details
-                form1ref.updateDonorRecord(new Donor(firstName, lastName, address, phoneNum, birthdate, new Blood(bloodType)));
+                form1ref.updateDonorRecord(oldDonor, new Donor(firstName, lastName, address, phoneNum, birthdate, new Blood(bloodType)));
 
                 // Update the graph
-                form1ref.updateChart(Donor.Blood.ToFormattedString(), bloodType);
+                form1ref.updateChart(oldDonor.Blood.ToFormattedString(), bloodType);
+
+                // Reset the filter
+                form1ref.resetFilter();
 
                 // Close the form as changes are already saved
                 this.Close();

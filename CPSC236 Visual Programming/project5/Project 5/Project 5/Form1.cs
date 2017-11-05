@@ -15,17 +15,20 @@ namespace Project_5
     public partial class Form1 : Form
     {
         BindingList<Donor> donorList;
+        BindingList<Donor> filterList;
         const string FILENAME = "donors.txt";
         const string SERIES_NAME = "BBR";
         string[] BLOOD_TYPES = new string[8];
         int[] records = new int[8];
+        bool filter = false;
 
         public Form1()
         {
             InitializeComponent();
 
-            // Declare new Binding List of type Donor
+            // Declare new Binding Lists of type Donor
             donorList = new BindingList<Donor>();
+            filterList = new BindingList<Donor>();
 
             // Load the donor file if it exists
             loadFile(donorList, FILENAME);
@@ -38,6 +41,10 @@ namespace Project_5
 
             // Set the display member to have the first name and the last name of the donor
             donorListBox.DisplayMember = "FullName";
+
+            // Set combo box default values
+            bloodTypeFilter.SelectedIndex = 0;
+            bloodTypePicker.SelectedIndex = 0;
         }
 
         private void setupChart()
@@ -214,6 +221,9 @@ namespace Project_5
                 // Add the donor to the list
                 donorList.Add(new Donor(firstName, lastName, address, phoneNum, birthdate, new Blood(bloodType)));
 
+                // Reset the filter
+                resetFilter();
+
                 // Update the graph
                 updateChartPlusOne(bloodType);
             }
@@ -248,12 +258,30 @@ namespace Project_5
             // If no item is selected, the index is -1, which doesn't exist, so make sure to not try to delete it
             if (donorListBox.SelectedIndex > -1)
             {
-                // Update the graph
-                Donor donor = (Donor)donorList[donorListBox.SelectedIndex];
-                updateChartMinusOne(donor.Blood.ToFormattedString());
-
                 // Remove from the the ListBox Items at the particular index that was selected
-                donorList.RemoveAt(donorListBox.SelectedIndex);
+                if (!filter)
+                {
+                    // Update the graph
+                    Donor donor = donorList[donorListBox.SelectedIndex];
+                    updateChartMinusOne(donor.Blood.ToFormattedString());
+
+                    // If unfilitered list
+                    donorList.RemoveAt(donorListBox.SelectedIndex);
+                }
+                else
+                {
+                    // If filtered list
+
+                    // Get the donor object from the filtered list
+                    Donor filterDonor = filterList[donorListBox.SelectedIndex];
+                    updateChartMinusOne(filterDonor.Blood.ToFormattedString());
+
+                    // Remove donor list instance
+                    donorList.RemoveAt(donorList.IndexOf(filterDonor));
+
+                    // Remove filter list instance
+                    filterList.RemoveAt(donorListBox.SelectedIndex);
+                }
             }
         }
 
@@ -262,9 +290,86 @@ namespace Project_5
             saveFile(donorList, FILENAME);
         }
 
-        public void updateDonorRecord(Donor donor)
+        public void updateDonorRecord(Donor oldDonor, Donor newDonor)
         {
-            donorList[donorListBox.SelectedIndex] = donor;
+            donorList[donorList.IndexOf(oldDonor)] = newDonor;
+        }
+
+        private void filterBloodBtn_Click(object sender, EventArgs e)
+        {
+            // Clear the filter list
+            filterList.Clear();
+
+            // Get the blood type filter
+            string bloodType = bloodTypeFilter.Text.ToString();
+
+            // Set the filter label
+            filterLabel.Text = "Filtering for: " + bloodType;
+
+            // Loop through all the records and put records of particular filter into the filtered list
+            foreach (Donor donor in donorList)
+            {
+                if (donor.Blood.ToFormattedString() == bloodType)
+                {
+                    filterList.Add(donor);
+                }
+            }
+
+            // Set the datasource of the listbox to the filtered list
+            donorListBox.DataSource = filterList;
+
+            // Set the display member to have the first name and the last name of the donor
+            donorListBox.DisplayMember = "FullName";
+
+            filter = true;
+        }
+
+        private void showAllRecordsBtn_Click(object sender, EventArgs e)
+        {
+            resetFilter();
+        }
+
+        public void resetFilter()
+        {
+            // Set the filter label
+            filterLabel.Text = "No filter applied.";
+
+            // Set the datasource of the listbox to the filtered list
+            donorListBox.DataSource = donorList;
+
+            // Set the display member to have the first name and the last name of the donor
+            donorListBox.DisplayMember = "FullName";
+
+            filter = false;
+        }
+
+        private void searchNameBtn_Click(object sender, EventArgs e)
+        {
+            // Clear the filter list
+            filterList.Clear();
+
+            // Get the search name
+            string name = nameSearchBox.Text.ToString();
+
+            // Set the filter label
+            filterLabel.Text = "Filtering for: " + name;
+
+            // Loop through all the records and put records of particular filter into the filtered list
+            foreach (Donor donor in donorList)
+            {
+                if (donor.FullName == name)
+                {
+                    filterList.Add(donor);
+                }
+            }
+
+            // Set the datasource of the listbox to the filtered list
+            donorListBox.DataSource = filterList;
+
+            // Set the display member to have the first name and the last name of the donor
+            donorListBox.DisplayMember = "FullName";
+
+            filter = true;
         }
     }
 }
