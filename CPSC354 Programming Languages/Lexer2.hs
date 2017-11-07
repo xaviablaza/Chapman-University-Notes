@@ -120,8 +120,13 @@ relation = (lexeme . try) $ string "<=" <|> string ">=" <|> string ">" <|> strin
 relation' :: Parser MoBettaToken
 relation' = fmap Relation relation 
 
-boolconst :: Parser String
-boolconst = (lexeme . try) $ string "true" <|> string "false"
+boolconst :: Parser Bool
+boolconst = (lexeme . try) p
+  where
+    if string "true" == "true"
+      then return True
+      else if string "false" == "false"
+        then return False
 
 boolconst' :: Parser MoBettaToken
 boolconst' = fmap BoolConst boolconst
