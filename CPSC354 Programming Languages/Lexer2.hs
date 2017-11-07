@@ -120,13 +120,8 @@ relation = (lexeme . try) $ string "<=" <|> string ">=" <|> string ">" <|> strin
 relation' :: Parser MoBettaToken
 relation' = fmap Relation relation 
 
-boolconst :: Parser Bool
-boolconst = (lexeme . try) p
-  where
-    if string "true" == "true"
-      then return True
-      else if string "false" == "false"
-        then return False
+boolconst :: Parser String
+boolconst = (lexeme . try) $ string "true" <|> string "false"
 
 boolconst' :: Parser MoBettaToken
 boolconst' = fmap BoolConst boolconst
@@ -137,3 +132,25 @@ keyword = (lexeme . try) $ string "while" <|> string "if" <|> string "then" <|> 
 
 keyword' :: Parser MoBettaToken
 keyword' = fmap Keyword keyword
+
+-- GG HOW TO MAKE A PARSER
+-- Turn it into a tree that determines the structure of the program
+data Statement
+  = Assign String Expr
+  | While BExpr Statement
+  | If BExpr Statement Statement
+  | Skip
+
+while :: Parser Statement
+while = do
+  string "while"
+  b <- bexpr
+  s <- statement
+  return $ While b s
+
+statement :: Parser Statement
+statement = assign <|> block <|> while
+
+-- This is not correct
+expression:: Parser Expr
+expression = return $ IntConst 5
