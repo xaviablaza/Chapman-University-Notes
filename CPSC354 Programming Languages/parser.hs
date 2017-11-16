@@ -6,6 +6,20 @@ import Text.Megaparsec.Char -- various basic parsers
 import qualified Text.Megaparsec.Char.Lexer as L
 import Text.Megaparsec.Expr
 
+data BExpr
+  = Reln Comp AExpr AExpr
+  | BoolConst Bool
+  | And BExpr BExpr
+  | Or BExpr BExpr
+  | Not BExpr
+  deriving (Show)
+
+data Comp
+  = Less
+  | LessEqual
+  | Greater
+  | GreaterEqual
+
 -- The abstract syntax of expressions
 -- What the expression is
 data AExpr
@@ -38,7 +52,7 @@ expr = makeExprParser factor opTable <?> "expression"
 -- parenthesized expressions are missing
 factor = choice [ intConst
                 , identifier
-                , between lparen rparen expr -- parenthesis fix
+                , between lparen rparen expr
                 ] <?> "factor"
 
 opTable = [ prefix  '-'  Neg
@@ -50,7 +64,7 @@ opTable = [ prefix  '-'  Neg
             , binary  '-'  Sub  ] ]
 
 -- These help declare operators
--- lexeme . try handles the whitespace and feeds it into InfixL
+-- They don't handle white space.
 binary  opName f = InfixL $ (lexeme . try) (f <$ char opName)
 prefix  opName f = Prefix $ (lexeme . try) (f <$ char opName)
 
