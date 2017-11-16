@@ -12,4 +12,4 @@ With that, me and my co-founder Michael have begun coding components from the sp
 
 As a proof of concept, we were able to translate @Alexis' portfolio to be a modular site - we can add front-end sections and enable/disable sections at our will depending on what we need. https://xaviablaza.github.io/hugo-lodi-theme-demo/
 
-Building a system like this would enforce good knowledge longevity and transfer of knowledge from senior uxsoc members to new founders. UXSoc will be larger than ateneo and the philippines, so it is good to prepare for this.
+Building a system like this would enforce good knowledge longevity and transfer of knowledge from senior uxsoc members to new founders. UXSoc will be larger than ateneo and the philippines, so it is good to prepare for this. building a uxsoc chapter from scratch with just a branding manual is hard, making a customizable uxsoc theme available for chapters to use would fulfill our goals as an organization in sharing resources with each other (:
