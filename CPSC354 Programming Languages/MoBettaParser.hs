@@ -62,10 +62,9 @@ statementParser = choice
       return (Assign v e)
     blockStmt = do
       lexeme (string "{")
-      s <- [statementParser]
+      s <- programParser -- a list of statements within a while statement is a program
       lexeme (string "}")
       return (Block s)
-    stubStatement = return Skip -- this is a stub that needs to be replaced in the above parsers. It is here only so this code will compile
 
 aExpr = makeExprParser aFactor aOpTable <?> "arithmetic expression"
 
