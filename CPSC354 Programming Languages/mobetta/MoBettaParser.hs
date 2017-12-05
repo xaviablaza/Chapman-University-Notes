@@ -7,12 +7,13 @@ import Text.Megaparsec
 import Text.Megaparsec.Char -- various basic parsers
 import qualified Text.Megaparsec.Char.Lexer as L
 import Text.Megaparsec.Expr
+import Data.Void
 
 import MoBettaAST
 
 -- Simplest use of Parsec is all we need.
 
-type Parser = Parsec () String
+type Parser = Parsec Void String
 
 
 programParser = sepEndBy1 statementParser semicolon <?>  "program"
