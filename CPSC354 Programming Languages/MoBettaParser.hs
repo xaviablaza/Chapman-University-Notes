@@ -83,16 +83,26 @@ aOpTable = [ [ prefix  "-"  (AUn Neg)
             , binary  "-"  (ABin Sub)  ] ]
 
 bExpr :: Parser BExpr
-bExpr = return (BoolConst True) -- Also a stub that needs to be fleshed out.
-                                -- Your implementation should follow the
-                                -- idea used in AExpr
+bExpr = choice
+  [   compBExpr -- Compare BExpr
+    , constBExpr -- Constant BExpr
+    , binBExpr
+    , UnBExpr
+  ] where
+    compBExpr = do
+        e1 <- aExpr
+        c  <- comparator
+        e2 <- aExpr
+        return (Reln c e1 e2)
+    constBExpr = do
+        bc <- choice [atomic "true" True, atomic "false" False]
+        return (BoolConst bc)
+    binBExpr = do
+        op <-
+    UnBExpr = do
+        hello <- wtf
 
--- This is a bit tricky. It is a parser for expressions like x % 2 == 0"
-comparison = do
-    e1 <- aExpr
-    c  <- comparator
-    e2 <- aExpr
-    return (Reln c e1 e2)
+
 
 comparator = choice compTable <?> "comparator"
 
@@ -147,7 +157,9 @@ intConst = fmap IntConst intConst'
           notFollowedBy letterChar -- fail if followed by a letter
           return x -- return the  result if we haven't failed
 
+boolconst :: Parser String
+boolconst = (lexeme . try) $ string "true" <|> string "false"
+
 tryit p = parse p "(--)"
 
 mbparse = parse programParser
-
