@@ -170,18 +170,18 @@ unaryOpTable =  [(Not, not)]
 boolCalc :: BExpr -> BoolCalc
 boolCalc (BoolConst b) = return b
 boolCalc (Reln cOp expr1 expr2) = do -- comparison operator
-  b1 <- (boolCalc expr1)
-  b2 <- (boolCalc expr2)
-  let func = (lookup cOp compTable)
+  b1 <- (intCalc expr1)
+  b2 <- (intCalc expr2)
+  let func = (opLookup cOp compTable)
   return $ func b1 b2
 boolCalc (BBin op expr1 expr2) = do
   b1 <- (boolCalc expr1)
   b2 <- (boolCalc expr2)
-  let func = (lookup op andOrTable)
+  let func = (opLookup op andOrTable)
   return $ func b1 b2
 boolCalc (BUn op expr) = do
   r1 <- (boolCalc expr)
-  let func = (lookup op unaryOpTable)
+  let func = (opLookup op unaryOpTable)
   return $ func r1
 
 -- used as a lookup table to find out what the operation actually does
@@ -205,5 +205,5 @@ intCalc (ABin op expr1 expr2) = do
   let func = (opLookup op opTable) -- lookup to see if the operator is valid using opLookup helper function
   return $ func result1 result2 -- return everything
 intCalc (AUn op expr) = do
-  n <- expr
+  n <- intCalc expr
   return $ negate n
