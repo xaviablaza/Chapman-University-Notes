@@ -1,0 +1,25 @@
+Physical Schema: describes data layout
+reslations ads unordered files
+some data in sorted order
+
+logical schema
+the way that the tables are represented with their specific data attributes
+
+Relation scheme
+Beers(name: string, manf: string)
+
+relation schema = relation name and attribute list
+database = collection of relations
+database schema = set of all relations schemas in the database
+
+Data independence
+Concept: applications do not need to worry about how the data is stored and structured
+
+logical data independence: protection from changes in the logical structure of the data
+should not need to ask: can we add a new entity or attribute without rewriting the applications
+
+physical data independence: protection from physical layout changes
+should not need to ask which disks are the data stored on? is the data indexed?
+
+fault tolerance and query languages
+

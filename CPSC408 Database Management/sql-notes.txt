@@ -1,0 +1,17 @@
+atomic types
+characters: char(20), varchar(50)
+numbers: int, bigint, smallint, float
+others: money, datetime
+
+every attributes must have an atomic type
+hence tables are flat
+
+VARCHAR(20)
+
+schema of a table is the table name, its attributes, and their types
+
+a key is an attribute whose values are unique; we underline a key
+
+a key is a minimal subset of attributes that acts as a unique idneitifer for tuples in a creation
+a key is an implicit constraint on which tuples can be in the relation
+if two tuples agree on the value of the key, then they must be the same tuple
