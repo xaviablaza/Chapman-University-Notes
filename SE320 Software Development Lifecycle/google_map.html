@@ -18,10 +18,10 @@
       padding: 0;
     }
     
-    #floating-panel {
+    #addzone-panel {
       position: absolute;
       top: 10px;
-      left: 25%;
+      left:  20%;
       z-index: 5;
       background-color: #fff;
       padding: 5px;
@@ -31,12 +31,93 @@
       line-height: 30px;
       padding-left: 10px;
     }
+    #removezone-panel {
+    position: absolute;
+      top: 10px;
+      left: 45%;
+      z-index: 5;
+      background-color: #fff;
+      padding: 5px;
+      border: 1px solid #999;
+      text-align: center;
+      font-family: 'Roboto', 'sans-serif';
+      line-height: 30px;
+      padding-left: 10px;
+    }
+    #legend-panel {
+    position: absolute;
+      top: 10px;
+      left: 60%;
+      z-index: 5;
+      background-color: #fff;
+      padding: 5px;
+      border: 1px solid #999;
+      text-align: center;
+      font-family: 'Roboto', 'sans-serif';
+      line-height: 30px;
+    }
+    .my-legend .legend-title {
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 90%;
+    }
+  .my-legend .legend-scale ul {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    }
+  .my-legend .legend-scale ul li {
+    display: block;
+    float: left;
+    width: 100px;
+    margin-bottom: 6px;
+    text-align: center;
+    font-size: 80%;
+    list-style: none;
+    }
+  .my-legend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 15px;
+    width: 100px;
+    }
+  .my-legend .legend-source {
+    font-size: 70%;
+    color: #999;
+    clear: both;
+    }
+  .my-legend a {
+    color: #777;
+    }
   </style>
 </head>
 <body>
-  <div id="floating-panel">
-    <input onclick="removeRect();" type=button value="Remove Rectangle">
-    <input onclick="addRect();" type=button value="Add New Rectangle">
+  <div id="addzone-panel">
+    <input class="form-control" id="zone" type="text" aria-describedby="zoneHelp" placeholder="Enter zone name">
+    <input onclick="addRect();" type=button value="Add New Zone">
+    <input onclick="saveRect();" type=button value="Save All Zones">
+  </div>
+  <div id="removezone-panel">
+    <select>
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
+    <input onclick="removeRect();" type=button value="Remove Zone">
+  </div>
+  <div id="legend-panel">
+    <div class='my-legend'>
+    <div class='legend-scale'>
+    <ul class='legend-labels'>
+        <li><span style='background:#F1EEF6;'></span>Current Zone</li>
+        <li><span style='background:#74A9CF;'></span>Edited Zone</li>
+        <li><span style='background:#045A8D;'></span>Saved Zone</li>
+    </ul>
+    </div>
+</div>
   </div>
   <div id="map"></div>
   <script>
@@ -50,49 +131,30 @@
       var default_location = {lat: 33.793348, lng: -117.851350};
   
       function initMap() {
-  
           day_map = new google.maps.Map(document.getElementById('map'), {
               center: default_location,
               zoom: 13
           });
-          map = nightMode(hour, day_map); //map depending on the time of the day
-  
+          
+          // Change color of map depending on time of day
+          map = nightMode(hour, day_map);
+          
+          // Infowindow is like a popup on the map
           infoWindow = new google.maps.InfoWindow;
-  
+    
           // Try HTML5 geolocation.
           if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(function (position) {
+              navigator.geolocation.getCurrentPosition(function(position) {
                   var pos = {
                       lat: position.coords.latitude,
                       lng: position.coords.longitude
                   };
-                  //  infoWindow.setPosition(pos);
                   // Create a marker and set its position.
                   var marker = new google.maps.Marker({
                       map: map,
                       position: pos,
                   });
-                  infoWindow.open(map);
-  
-                  //map.setZoom(16);
-                  //map.setCenter(pos); //SET LOCATION
-  
-                  map.addListener('center_changed', function () {
-                      // 3 seconds after the center of the map has changed, pan back to the
-                      // marker.
-                      //window.setTimeout(function() { //MARKER PAN ON CLICK EVENT
-                      //map.panTo(marker.getPosition());
-                      //}, 3000);
-                  });
-  
-                  //marker.addListener('click', function() { //ZOOM IN ON MARKER
-                  // map.setZoom(18);
-                  // map.setCenter(marker.getPosition());
-                  //});
-  
-                  //alert("Current Location LAT & LONG: " + map.getCenter()); //Location to be sent to PSAFE
-  
-              }, function () {
+              }, function() {
                   handleLocationError(true, infoWindow, map.getCenter());
               });
           } else {
@@ -101,7 +163,8 @@
           }
       }
   
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) { //IF LOCATION FAILED
+      // If location finding has failed then show an infoWindow
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
           infoWindow.setPosition(pos);
           infoWindow.setContent(browserHasGeolocation ?
               'Error: The Geolocation service failed.' :
@@ -109,8 +172,10 @@
           infoWindow.open(map);
       }
   
+      // This function adds a rectangular zone on the map
       function addRect() {
-          var bounds = { //PARAMS OF PSAFE TO ALLOW PICKUP
+          // These are the bounds around the university that PSAFE has given us
+          var bounds = {
               north: 33.805033545182255,
               south: 33.776082751851,
               east: -117.83182508881,
