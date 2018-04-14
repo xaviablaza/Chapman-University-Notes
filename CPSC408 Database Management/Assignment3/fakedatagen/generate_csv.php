@@ -17,6 +17,7 @@ for ($i=0; $i<1000; $i++) {
 	// Name,Gender,Birthday,Address,Title,Email,BlockstackID
 	fwrite($handle, $faker->name . ",");
 	fwrite($handle, $faker->randomElement($gender) . ",");
+	fwrite($handle, $faker->date($format = 'Y-m-d', $max = 'now') . ",");
 	fwrite($handle, $faker->city . ",");
 	fwrite($handle, $faker->jobTitle . ",");
 	fwrite($handle, $faker->email . ",");
