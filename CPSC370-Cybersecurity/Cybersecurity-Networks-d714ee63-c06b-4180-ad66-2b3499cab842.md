@@ -243,3 +243,67 @@ Convert:
     /24 subnet is 0-255
 
 The reason why is because we need to find the network address.
+
+## Wireless Networks
+
+	• Security Concerns
+		○ Radio signals leak outside buildings
+		○ Detection of unauthorized devices
+		○ Intercepting wireless communications
+		○ Man-in-the-middle attacks
+		○ Verification of users
+		○ Restricting access
+	• Types of Wireless Networks
+		○ Infrastructure
+			§ Client machine establishes a radio connection to a special network, called access point
+			§ Access points connected to a wired network, which provides a gateway to the internet
+		○ Peer to Peer
+			§ Multiple P2P machines connect to each other
+			§ Typically used in ad-hoc networks and internet connection sharing
+	• SSID
+		○ Multiple Wireless networks can coexist
+			§ Each network is identified by a 32-bit character
+			§ Typical default SSID is the manufacturer's name
+			§ SSIDs often broadcast to enable discovery of the network by prospective clients
+		○ SSIDs are not signed, thus enabling a simple spoofing attack
+			§ Place a rogue access point in a public location
+			§ Use the SSID of an ISP
+			§ Set up a login page similar to the one of the ISP
+			§ Wait for clients to connect to the rogue access point and authenticate
+			§ Possibly forward session to ISP network
+			§ Facilitated by automatic connection defaults
+	• Eavesdropping and Spoofing
+		○ All wireless networks can be eavesdropped
+		○ MAC-based authentication typically used to identify approved machines in corporate network
+		○ MAC spoofing attacks possible, as in wired networks
+		○ Sessions kept active after brief disconnects
+		○ If ISP client does not explicitly end a session, MAC spoofing allows to take over that session
+	• Captive Portal
+		○ Protocol
+			§ DCHP provides IP address
+			§ Name server maps everything to authentication server
+			§ Firewall blocks all other traffic
+			§ Any URL is redirected to an authentication page
+			§ After authentication, regular network services reinstated
+			§ Client identified by MAC address
+			§ Used by wireless ISPs
+		○ Security Issues
+			§ A MAC spoofing and session stealing attack may be performed if client does not actively disconnect
+			§ A tunneling attack can bypass a captive portal if DNS traffic beyond firewall is not blocked before authentication
+	• Wardriving and Warchalking
+		○ Driving around looking for wireless local area networks
+		○ Some use GPS devices to log locations, post online
+		○ Software such as NetStumbler for Windows, KisMac for Mac, and Kismet for Linux are easily available online
+		○ Legality is unclear when no information is transmitted, and no network services are used
+		○ Warchalking involves leaving chalk marks on sidewalks marking wireless networks and associated information
+	• Wired Equivalent Privacy (WEP)
+		○ Goals
+			§ Confidentiality: eavesdropping is prevented
+			§ Data integrity: packets cannot be tampered with
+			§ Access Control: Only properly encrypted packets are routed
+		○ Design Constraints
+			§ Inexpensive hardware implementation with 90''s technology
+			§ Compliance with early US export control regulations on encryption devices (40-bit keys)
+		○ Implementations and Limitations
+			§ Encrypts the body of each frame at the data-link level
+Legacy IEEE 802.11 standard to be avoided
