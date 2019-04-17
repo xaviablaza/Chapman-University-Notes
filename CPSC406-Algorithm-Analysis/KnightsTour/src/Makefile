@@ -1,0 +1,2 @@
+build:
+	@javac *.java
